@@ -10,17 +10,15 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: url('https://images.unsplash.com/photo-1523240715630-9918c1381942?auto=format&fit=crop&q=80&w=1920');
+  background-image: url('../img/Bia_Index1.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.6;
 }
 
 .hero-gradient {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 40%, rgba(255, 255, 255, 0.2) 100%);
 }
 
 .hero-title {
