@@ -1,0 +1,120 @@
+/* Quiz (TracNghiem) */
+.quiz-container {
+  max-width: 800px;
+  margin: 160px auto 100px;
+  background: white;
+  padding: 60px;
+  border-radius: 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--color-slate-100);
+  border-radius: 10px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-brand-orange);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.question-title {
+  font-size: 24px;
+  color: var(--color-brand-blue);
+  margin-bottom: 30px;
+}
+
+.options-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.option-btn {
+  padding: 20px 30px;
+  border: 2px solid var(--color-slate-100);
+  border-radius: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-slate-700);
+  transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--color-brand-blue);
+  background: var(--color-brand-light-blue);
+  color: var(--color-brand-blue);
+}
+
+.option-btn.selected {
+  border-color: var(--color-brand-blue);
+  background: var(--color-brand-blue);
+  color: white;
+}
+
+.result-card {
+  background: var(--color-slate-50);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid var(--color-slate-100);
+  text-align: left;
+}
+
+.result-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.result-title {
+  font-size: 28px;
+  color: var(--color-brand-blue);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.career-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.career-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--color-slate-100);
+  transition: all 0.2s ease;
+}
+
+.career-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-brand-blue);
+}
+
+.career-icon {
+  color: var(--color-brand-orange);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#result-category-desc {
+  color: var(--color-slate-600);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
