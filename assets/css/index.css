@@ -6,6 +6,25 @@
   overflow: hidden;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .hero-bg {
   position: absolute;
   inset: 0;

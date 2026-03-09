@@ -11,6 +11,25 @@
   transition: all 0.3s ease;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .filter-chip:hover {
   background: rgba(255, 255, 255, 0.2);
 }

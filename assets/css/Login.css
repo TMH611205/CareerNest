@@ -6,6 +6,25 @@ body {
     min-height: 100vh;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .login-card {
     border-radius: 20px;
     overflow: hidden;
@@ -24,14 +43,6 @@ body {
 .form-wrapper {
     width: 85%;
     max-width: 380px;
-}
-
-.career {
-    color: #0a3d91;
-}
-
-.nest {
-    color: #ff7a00;
 }
 
 .form-control:focus {
@@ -57,4 +68,32 @@ body {
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+.back-home{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+
+    background: #ff7a00;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.25s;
+}
+
+.back-home:hover{
+    background:#0a3d91;
+    color:white;
+    transform: translateX(-3px);
 }

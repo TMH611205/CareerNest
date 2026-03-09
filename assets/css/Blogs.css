@@ -5,6 +5,25 @@
   min-height: 100vh;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .blog-layout {
   display: grid;
   grid-template-columns: 3fr 1fr;

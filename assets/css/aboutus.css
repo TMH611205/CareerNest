@@ -20,6 +20,25 @@
     opacity: 0.1;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .hero-tag {
     display: inline-block;
     padding: 6px 16px;
@@ -285,21 +304,26 @@
         grid-template-columns: 1fr;
         gap: 40px;
     }
+
     .stats-bar {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .timeline::before {
         left: 20px;
     }
+
     .timeline-item {
         width: 100%;
         left: 0 !important;
         text-align: left !important;
         padding-left: 50px;
     }
+
     .timeline-dot {
         left: 10px !important;
     }
+
     .team-grid {
         grid-template-columns: 1fr;
     }

@@ -23,6 +23,25 @@
   transition: width 0.3s ease;
 }
 
+.navbar-logo {
+            height: 36px;
+        }
+
+        .career {
+            color: #0a3d91;
+        }
+
+        .nest {
+            color: #ff7a00;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
 .question-title {
   font-size: 24px;
   color: var(--color-brand-blue);
