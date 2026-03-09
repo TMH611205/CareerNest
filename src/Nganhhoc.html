@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ngành Học - CareerNest</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/Nganhhoc.css">
+  </head>
+  <body>
+    <div class="bg-pattern"></div>
+
+    <header class="header">
+      <div class="top-bar hidden-mobile">
+        <div class="container flex justify-between items-center">
+          <div class="flex gap-6">
+            <div class="flex items-center gap-2">
+              <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
+              <span>contact@careernest.vn</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="phone" style="color: var(--color-brand-orange); width: 14px;"></i>
+              <span>+84 (028) 1234 5678</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="#"><i data-lucide="facebook" style="width: 14px;"></i></a>
+            <a href="#"><i data-lucide="twitter" style="width: 14px;"></i></a>
+            <a href="#"><i data-lucide="instagram" style="width: 14px;"></i></a>
+            <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
+            <a href="#" id="language-switcher" class="flex items-center gap-2">
+              <i data-lucide="globe" style="width: 14px;"></i>
+              <span data-i18n="lang-text">Tiếng Việt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="container flex justify-between items-center">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i data-lucide="brain"></i></div>
+            <div class="logo-text">
+              <span class="logo-name">CareerNest</span>
+              <span class="logo-tagline">Future Builder</span>
+            </div>
+          </a>
+          
+          <div class="nav-links hidden-mobile">
+            <a href="index.html" class="nav-link" data-i18n="nav-home">Trang chủ</a>
+            <a href="aboutus.html" class="nav-link" data-i18n="nav-about">Về CareerNest</a>
+            <a href="Nganhhoc.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-majors">Ngành học</a>
+            <a href="TracNghiem.html" class="nav-link" data-i18n="nav-test">Trắc nghiệm</a>
+            <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button class="hidden-mobile" style="color: var(--color-slate-400);"><i data-lucide="search"></i></button>
+            <a href="Login.html" class="nav-link hidden-mobile" style="font-weight: 700; margin-right: 10px;" data-i18n="nav-login">Đăng nhập</a>
+            <button class="btn btn-orange" data-i18n="btn-start">Bắt đầu ngay</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="majors-hero" style="padding: 160px 0 100px; background: linear-gradient(135deg, var(--color-brand-blue) 0%, #002d6b 100%); color: white; text-align: center; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 10;">
+          <span style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; color: var(--color-brand-orange); margin-bottom: 16px; display: block;">Khám phá tương lai</span>
+          <h1 class="hero-title" style="font-size: 4rem; margin-bottom: 24px; line-height: 1.1;">Định Hướng <br><span style="color: var(--color-brand-orange);">Sự Nghiệp</span> Của Bạn</h1>
+          <p class="hero-desc" style="max-width: 700px; margin: 0 auto 40px; font-size: 18px; opacity: 0.9;">Hệ thống dữ liệu chi tiết về hơn 200 ngành nghề tại Việt Nam, giúp bạn có cái nhìn toàn diện trước khi đưa ra quyết định quan trọng nhất.</p>
+          
+          <div class="search-container-large" style="max-width: 800px; margin: 0 auto; background: white; padding: 8px; border-radius: 100px; display: flex; gap: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+            <div style="padding: 0 20px; display: flex; align-items: center; color: var(--color-slate-400);">
+              <i data-lucide="search"></i>
+            </div>
+            <input type="text" id="major-search-input" placeholder="Tìm kiếm ngành học (ví dụ: Marketing, AI, Y khoa...)" style="flex: 1; border: none; outline: none; font-size: 16px; font-family: inherit;">
+            <button id="major-search-btn" class="btn btn-orange" style="padding: 12px 32px;">Tìm kiếm</button>
+          </div>
+
+          <div class="flex justify-center gap-4 mt-8 flex-wrap" id="filter-container">
+            <button class="filter-chip active" data-category="all">Tất cả</button>
+            <button class="filter-chip" data-category="tech">Kỹ thuật & Công nghệ</button>
+            <button class="filter-chip" data-category="business">Kinh tế & Quản lý</button>
+            <button class="filter-chip" data-category="health">Y dược & Sức khỏe</button>
+            <button class="filter-chip" data-category="art">Nghệ thuật & Thiết kế</button>
+            <button class="filter-chip" data-category="social">Sư phạm & Xã hội</button>
+          </div>
+        </div>
+        <!-- Decorative elements -->
+        <div style="position: absolute; top: -10%; right: -5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(242, 125, 38, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+        <div style="position: absolute; bottom: -10%; left: -5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%); border-radius: 50%;"></div>
+      </section>
+
+      <!-- Trending Section -->
+      <section style="padding: 100px 0; background: white;">
+        <div class="container">
+          <div class="flex justify-between items-end mb-12">
+            <div>
+              <h2 style="font-size: 32px; color: var(--color-brand-blue); margin-bottom: 8px;">Ngành Học Xu Hướng 2024</h2>
+              <p style="color: var(--color-slate-500);">Dựa trên dữ liệu tuyển dụng và dự báo kinh tế toàn cầu.</p>
+            </div>
+            <a href="#" style="color: var(--color-brand-orange); font-weight: 700; display: flex; align-items: center; gap: 8px;">
+              Xem tất cả xu hướng <i data-lucide="arrow-right" style="width: 18px;"></i>
+            </a>
+          </div>
+
+          <div class="trending-major-card" style="display: grid; grid-template-columns: 1.2fr 1fr; background: var(--color-slate-50); border-radius: 32px; overflow: hidden; border: 1px solid var(--color-slate-100);">
+            <div style="position: relative;">
+              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200" style="width: 100%; height: 100%; object-fit: cover;" alt="AI" referrerPolicy="no-referrer">
+              <div style="position: absolute; top: 20px; left: 20px; background: var(--color-brand-orange); color: white; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700;">HOT: Tăng trưởng 45%</div>
+            </div>
+            <div style="padding: 60px;">
+              <span style="color: var(--color-brand-orange); font-weight: 700; font-size: 14px; text-transform: uppercase;">Công nghệ tương lai</span>
+              <h3 style="font-size: 36px; margin: 16px 0 24px;">Trí Tuệ Nhân Tạo (AI) & Khoa Học Dữ Liệu</h3>
+              <p style="color: var(--color-slate-600); margin-bottom: 32px; font-size: 16px; line-height: 1.8;">
+                AI không còn là tương lai, nó là hiện tại. Ngành học này tập trung vào việc xây dựng các hệ thống có khả năng học hỏi và đưa ra quyết định. Cơ hội việc làm trải dài từ y tế, tài chính đến giải trí.
+              </p>
+              
+              <div class="grid grid-cols-2 gap-6 mb-10" style="margin-bottom: 40px;">
+                <div style="background: white; padding: 20px; border-radius: 16px; border: 1px solid var(--color-slate-200);">
+                  <div style="color: var(--color-slate-400); font-size: 12px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">Lương khởi điểm</div>
+                  <div style="font-size: 20px; font-weight: 800; color: var(--color-brand-blue);">$1,200 - $2,500</div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 16px; border: 1px solid var(--color-slate-200);">
+                  <div style="color: var(--color-slate-400); font-size: 12px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">Độ khó chương trình</div>
+                  <div style="font-size: 20px; font-weight: 800; color: #ef4444;">Rất Cao (4.5/5)</div>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <button class="btn btn-orange" style="padding: 14px 32px;">Xem chi tiết lộ trình</button>
+                <button class="btn" style="border: 1px solid var(--color-slate-200); padding: 14px 32px;">Lưu lại</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="majors-list" style="padding: 100px 0; background: var(--color-slate-50);">
+        <div class="container">
+          <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 32px; color: var(--color-brand-blue); margin-bottom: 16px;">Tất Cả Ngành Học</h2>
+            <p style="color: var(--color-slate-500); max-width: 600px; margin: 0 auto;">Duyệt qua danh sách các ngành học phổ biến và tiềm năng nhất hiện nay.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-8" id="majors-grid">
+            <!-- Major 1: IT -->
+            <div class="major-card" data-category="tech" data-title="Công Nghệ Thông Tin IT Lập trình">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Tech" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.2/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kỹ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Công Nghệ Thông Tin</h3>
+                <p class="major-desc">Bao gồm lập trình, trí tuệ nhân tạo, an ninh mạng và phát triển phần mềm. Đây là ngành có tốc độ tăng trưởng nhanh nhất hiện nay.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #10b981;">Rất cao</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 95%; height: 100%; background: #10b981;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="trending-up" style="width: 14px;"></i> Nhu cầu cao</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 15M - 40M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tôi muốn tìm hiểu thêm về ngành Công Nghệ Thông Tin. Bạn có thể tư vấn cho tôi về các chuyên ngành nhỏ, cơ hội việc làm và mức lương khởi điểm không?'); else alert('Trợ lý AI đang khởi động, vui lòng thử lại sau giây lát.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 2: Marketing -->
+            <div class="major-card" data-category="business" data-title="Marketing Truyền thông Kinh doanh">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Marketing" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.7/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kinh tế</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Marketing & Truyền Thông</h3>
+                <p class="major-desc">Nghiên cứu thị trường, xây dựng thương hiệu và quảng cáo. Phù hợp với những bạn sáng tạo và nhạy bén với xu hướng.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #10b981;">Rất cao</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 88%; height: 100%; background: #10b981;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="zap" style="width: 14px;"></i> Năng động</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 35M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn cho tôi về ngành Marketing. Cơ hội việc làm trong mảng Digital Marketing hiện nay thế nào?');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 3: Medicine -->
+            <div class="major-card" data-category="health" data-title="Y Đa Khoa Bác sĩ Y khoa Health">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Medical" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.5/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Sức khỏe</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Y Đa Khoa</h3>
+                <p class="major-desc">Đào tạo bác sĩ có kiến thức toàn diện về chẩn đoán và điều trị bệnh. Đòi hỏi thời gian học tập dài và sự tận tâm tuyệt đối.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #10b981;">Tuyệt vời</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 98%; height: 100%; background: #10b981;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="heart" style="width: 14px;"></i> Nhân văn</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 20M - 80M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn cho tôi về lộ trình học ngành Y Đa Khoa tại Việt Nam.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 4: AI -->
+            <div class="major-card" data-category="tech" data-title="Trí Tuệ Nhân Tạo AI Khoa học dữ liệu Data Science">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600" class="major-img" alt="AI" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.8/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kỹ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Trí Tuệ Nhân Tạo (AI)</h3>
+                <p class="major-desc">Học cách xây dựng các hệ thống thông minh, máy học và xử lý ngôn ngữ tự nhiên. Ngành học mũi nhọn của kỷ nguyên số.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #10b981;">Bùng nổ</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background: #10b981;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="cpu" style="width: 14px;"></i> Công nghệ cao</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 30M - 100M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Ngành AI cần học những kiến thức toán học nào?');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 5: Design -->
+            <div class="major-card" data-category="art" data-title="Thiết Kế Đồ Họa Graphic Design Nghệ thuật Art">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Design" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.8/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Nghệ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Thiết Kế Đồ Họa</h3>
+                <p class="major-desc">Dành cho những tâm hồn sáng tạo, yêu cái đẹp. Học về thẩm mỹ, công cụ thiết kế và truyền thông thị giác.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #3b82f6;">Trung bình - Cao</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 75%; height: 100%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="palette" style="width: 14px;"></i> Sáng tạo tự do</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 25M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Làm sao để xây dựng portfolio thiết kế ấn tượng?');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 6: Education -->
+            <div class="major-card" data-category="social" data-title="Sư Phạm Giáo Dục Education Xã hội">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Education" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.2/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Xã hội</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Sư Phạm & Giáo Dục</h3>
+                <p class="major-desc">Đào tạo những người truyền lửa kiến thức. Phù hợp với những bạn yêu trẻ và có khả năng truyền đạt tốt.</p>
+                
+                <div style="margin-bottom: 20px; padding: 12px; background: var(--color-slate-50); border-radius: 12px;">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span style="color: var(--color-slate-500);">Cơ hội việc làm</span>
+                    <span style="font-weight: 700; color: #3b82f6;">Ổn định</span>
+                  </div>
+                  <div style="height: 4px; background: var(--color-slate-200); border-radius: 10px; overflow: hidden;">
+                    <div style="width: 70%; height: 100%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="book-open" style="width: 14px;"></i> Giá trị bền vững</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 7M - 20M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Xu hướng giáo dục STEM hiện nay thế nào?');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 2 Content (Initially Hidden) -->
+            <!-- Major 7: Architecture -->
+            <div class="major-card" data-category="art" data-title="Kiến Trúc Xây dựng Architecture Art">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Architecture" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.9/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Nghệ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Kiến Trúc</h3>
+                <p class="major-desc">Kết hợp giữa nghệ thuật và kỹ thuật xây dựng. Tạo ra những không gian sống và làm việc ấn tượng.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="ruler" style="width: 14px;"></i> Sáng tạo</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 12M - 45M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Kiến Trúc.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 8: Logistics -->
+            <div class="major-card" data-category="business" data-title="Logistics Quản lý chuỗi cung ứng Supply Chain Business">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Logistics" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.0/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kinh tế</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Logistics & Chuỗi Cung Ứng</h3>
+                <p class="major-desc">Quản lý dòng chảy hàng hóa toàn cầu. Ngành học cốt lõi của thương mại điện tử hiện đại.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="truck" style="width: 14px;"></i> Toàn cầu</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 12M - 40M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Logistics.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 9: Psychology -->
+            <div class="major-card" data-category="social" data-title="Tâm Lý Học Psychology Xã hội Social">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Psychology" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.5/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Xã hội</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Tâm Lý Học</h3>
+                <p class="major-desc">Nghiên cứu về hành vi và tâm trí con người. Giúp giải quyết các vấn đề tâm lý trong xã hội hiện đại.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="users" style="width: 14px;"></i> Thấu hiểu</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 8M - 30M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Tâm Lý Học.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 3 Content (Initially Hidden) -->
+            <!-- Major 10: Biotechnology -->
+            <div class="major-card" data-category="tech" data-title="Công Nghệ Sinh Học Biotechnology Tech">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1532187875605-1ef6c237ddc4?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Biotech" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.1/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kỹ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Công Nghệ Sinh Học</h3>
+                <p class="major-desc">Ứng dụng sinh học vào sản xuất và đời sống. Đóng vai trò quan trọng trong y tế và nông nghiệp sạch.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="microscope" style="width: 14px;"></i> Nghiên cứu</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 15M - 50M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Công Nghệ Sinh Học.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 11: Finance -->
+            <div class="major-card" data-category="business" data-title="Tài Chính Ngân Hàng Finance Banking Business">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1454165833767-0274b24f2d9b?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Finance" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.6/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kinh tế</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Tài Chính Ngân Hàng</h3>
+                <p class="major-desc">Quản lý tiền tệ, đầu tư và các dịch vụ ngân hàng. Phù hợp với những bạn giỏi tính toán và phân tích.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="bar-chart-3" style="width: 14px;"></i> Phân tích</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 12M - 60M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Tài Chính Ngân Hàng.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 12: Pharmacy -->
+            <div class="major-card" data-category="health" data-title="Dược Học Pharmacy Health">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Pharmacy" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.3/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Sức khỏe</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Dược Học</h3>
+                <p class="major-desc">Nghiên cứu về thuốc và cách sử dụng thuốc an toàn. Ngành học có thu nhập ổn định và cơ hội kinh doanh riêng.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="pill" style="width: 14px;"></i> Chính xác</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 15M - 45M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Dược Học.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 3 Additional Content -->
+            <!-- Major 13: Law -->
+            <div class="major-card" data-category="social" data-title="Luật Kinh Tế Law Social">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Law" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.4/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Xã hội</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Luật Kinh Tế</h3>
+                <p class="major-desc">Nghiên cứu hệ thống pháp luật trong kinh doanh. Cơ hội làm việc tại các tập đoàn lớn và văn phòng luật.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="scale" style="width: 14px;"></i> Công lý</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 50M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Luật.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 14: English -->
+            <div class="major-card" data-category="social" data-title="Ngôn Ngữ Anh English Language Social">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1543167664-40d266a52703?auto=format&fit=crop&q=80&w=600" class="major-img" alt="English" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.9/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Xã hội</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Ngôn Ngữ Anh</h3>
+                <p class="major-desc">Làm chủ ngôn ngữ toàn cầu. Mở ra cơ hội trong biên phiên dịch, giảng dạy và kinh doanh quốc tế.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="languages" style="width: 14px;"></i> Toàn cầu</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 30M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Ngôn Ngữ Anh.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 15: Hotel Management -->
+            <div class="major-card" data-category="business" data-title="Quản Trị Khách Sạn Hotel Management Tourism Business">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Hotel" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.7/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kinh tế</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Quản Trị Khách Sạn</h3>
+                <p class="major-desc">Nghiệp vụ du lịch và quản lý dịch vụ cao cấp. Phù hợp với những bạn yêu thích giao tiếp và dịch vụ.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="coffee" style="width: 14px;"></i> Dịch vụ</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 35M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Quản Trị Khách Sạn.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 16: Automotive -->
+            <div class="major-card" data-category="tech" data-title="Công Nghệ Kỹ Thuật Ô Tô Automotive Engineering Tech">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Automotive" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">9.2/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kỹ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Công Nghệ Ô Tô</h3>
+                <p class="major-desc">Thiết kế, chế tạo và bảo trì các loại xe hiện đại. Đón đầu xu hướng xe điện và xe tự lái.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="settings" style="width: 14px;"></i> Kỹ thuật</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 12M - 45M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Công Nghệ Ô Tô.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 17: Journalism -->
+            <div class="major-card" data-category="social" data-title="Báo Chí Truyền Thông Journalism Social">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Journalism" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.3/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Xã hội</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Báo Chí & Truyền Thông</h3>
+                <p class="major-desc">Kỹ năng viết lách, phỏng vấn và sản xuất nội dung đa phương tiện. Phù hợp với những bạn yêu thích sự thật và tin tức.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="pen-tool" style="width: 14px;"></i> Ngôn luận</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 8M - 25M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Báo Chí.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Major 18: Environment -->
+            <div class="major-card" data-category="tech" data-title="Khoa Học Môi Trường Environmental Science Tech">
+              <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" class="major-img" alt="Environment" referrerPolicy="no-referrer">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">8.8/10 Hài lòng</div>
+              </div>
+              <div class="major-content">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="major-tag">Kỹ thuật</span>
+                  <div class="flex gap-1">
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; fill: #f59e0b; color: #f59e0b;"></i>
+                    <i data-lucide="star" style="width: 12px; color: #cbd5e1;"></i>
+                  </div>
+                </div>
+                <h3 class="major-title">Khoa Học Môi Trường</h3>
+                <p class="major-desc">Nghiên cứu bảo vệ hệ sinh thái và phát triển bền vững. Ngành học quan trọng trong bối cảnh biến đổi khí hậu.</p>
+                <div class="major-stats">
+                  <div class="stat-item"><i data-lucide="leaf" style="width: 14px;"></i> Bền vững</div>
+                  <div class="stat-item"><i data-lucide="dollar-sign" style="width: 14px;"></i> 10M - 30M VNĐ</div>
+                </div>
+                <div class="flex gap-2 mt-6">
+                  <button class="btn" onclick="if(window.askCareerAI) window.askCareerAI('Tư vấn về ngành Môi Trường.');" style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+                    <i data-lucide="sparkles" style="width: 14px;"></i> Tư vấn AI
+                  </button>
+                  <button class="btn" style="background: var(--color-brand-light-blue); color: var(--color-brand-blue); padding: 8px 12px;"><i data-lucide="plus" style="width: 16px;"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pagination-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 60px;">
+            <button class="pagination-btn active" data-page="1">1</button>
+            <button class="pagination-btn" data-page="2">2</button>
+            <button class="pagination-btn" data-page="3">3</button>
+            <button class="pagination-btn" id="next-page"><i data-lucide="chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Grid Section: Career Path -->
+      <section style="padding: 100px 0; background: white;">
+        <div class="container">
+          <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 32px; color: var(--color-brand-blue); margin-bottom: 16px;">Lộ Trình Chinh Phục Sự Nghiệp</h2>
+            <p style="color: var(--color-slate-500);">Từng bước một, chúng tôi đồng hành cùng bạn từ khi còn ngồi trên ghế nhà trường.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 24px;">
+            <div style="grid-column: span 2; background: var(--color-brand-light-blue); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="width: 48px; height: 48px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--color-brand-blue); margin-bottom: 24px;">
+                <i data-lucide="compass"></i>
+              </div>
+              <h3 style="font-size: 24px; margin-bottom: 12px;">1. Khám phá bản thân</h3>
+              <p style="color: var(--color-slate-600);">Hiểu rõ điểm mạnh, điểm yếu và đam mê thông qua các bài trắc nghiệm khoa học.</p>
+            </div>
+            <div style="background: #fff7ed; border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #f97316; margin-bottom: 20px;">
+                <i data-lucide="search"></i>
+              </div>
+              <h4 style="margin-bottom: 8px;">2. Nghiên cứu</h4>
+              <p style="font-size: 14px; color: var(--color-slate-500);">Tìm hiểu sâu về ngành học và thị trường.</p>
+            </div>
+            <div style="background: #f0fdf4; border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #22c55e; margin-bottom: 20px;">
+                <i data-lucide="graduation-cap"></i>
+              </div>
+              <h4 style="margin-bottom: 8px;">3. Chọn trường</h4>
+              <p style="font-size: 14px; color: var(--color-slate-500);">Lựa chọn môi trường đào tạo phù hợp nhất.</p>
+            </div>
+            <div style="background: #fdf2f8; border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ec4899; margin-bottom: 20px;">
+                <i data-lucide="briefcase"></i>
+              </div>
+              <h4 style="margin-bottom: 8px;">4. Thực tập</h4>
+              <p style="font-size: 14px; color: var(--color-slate-500);">Cọ xát thực tế ngay từ năm 2, năm 3.</p>
+            </div>
+            <div style="grid-column: span 3; background: var(--color-slate-900); border-radius: 24px; padding: 40px; color: white; display: flex; align-items: center; justify-content: space-between;">
+              <div style="max-width: 60%;">
+                <h3 style="font-size: 28px; margin-bottom: 16px;">Bạn vẫn còn băn khoăn?</h3>
+                <p style="opacity: 0.7; margin-bottom: 24px;">Hãy để chuyên gia AI của chúng tôi phân tích hồ sơ và sở thích của bạn để đưa ra gợi ý chính xác nhất.</p>
+                <button class="btn btn-orange">Trò chuyện với AI ngay</button>
+              </div>
+              <div style="width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 60px;">
+                🤖
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="logo-icon" style="width: 32px; height: 32px;"><i data-lucide="brain" style="width: 18px;"></i></div>
+              <span class="footer-logo-name">CareerNest</span>
+            </div>
+            <p>Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
+            <div class="social-links">
+              <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+              <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+              <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-title">Khám Phá</h4>
+            <ul class="footer-links">
+              <li><a href="aboutus.html">Về CareerNest</a></li>
+              <li><a href="TracNghiem.html">Bài trắc nghiệm</a></li>
+              <li><a href="Nganhhoc.html">Ngành học</a></li>
+              <li><a href="Blogs.html">Blogs</a></li>
+              <li><a href="Admin.html">Quản trị</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-title">Liên Hệ</h4>
+            <ul class="footer-links">
+              <li class="flex items-center gap-3"><i data-lucide="map-pin" style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
+              <li class="flex items-center gap-3"><i data-lucide="phone" style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
+              <li class="flex items-center gap-3"><i data-lucide="mail" style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
+          <p>© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/language.js"></script>
+    <script type="module" src="/assets/js/ai-assistant.js"></script>
+    <script>
+      lucide.createIcons();
+
+      // Search and Filter Logic
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('major-search-input');
+        const searchBtn = document.getElementById('major-search-btn');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const majorCards = document.querySelectorAll('.major-card');
+        const majorsGrid = document.getElementById('majors-grid');
+
+        let currentCategory = 'all';
+        let currentSearchTerm = '';
+        let currentPage = 1;
+        const itemsPerPage = 6;
+
+        function filterMajors() {
+          let visibleCount = 0;
+          let filteredCards = [];
+
+          majorCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            const title = card.getAttribute('data-title').toLowerCase();
+            const matchesCategory = currentCategory === 'all' || category === currentCategory;
+            const matchesSearch = title.includes(currentSearchTerm.toLowerCase());
+
+            if (matchesCategory && matchesSearch) {
+              filteredCards.push(card);
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Handle pagination for filtered results
+          const totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+          
+          // Update pagination buttons visibility
+          const paginationBtns = document.querySelectorAll('.pagination-btn[data-page]');
+          paginationBtns.forEach(btn => {
+            const pageNum = parseInt(btn.getAttribute('data-page'));
+            if (pageNum <= totalPages) {
+              btn.style.display = 'flex';
+            } else {
+              btn.style.display = 'none';
+            }
+          });
+
+          // Show only items for current page
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+
+          filteredCards.forEach((card, index) => {
+            if (index >= startIndex && index < endIndex) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Handle no results
+          const existingNoResults = document.getElementById('no-results-msg');
+          if (visibleCount === 0) {
+            if (!existingNoResults) {
+              const msg = document.createElement('div');
+              msg.id = 'no-results-msg';
+              msg.style.gridColumn = 'span 3';
+              msg.style.textAlign = 'center';
+              msg.style.padding = '40px';
+              msg.style.color = 'var(--color-slate-500)';
+              msg.innerHTML = `
+                <i data-lucide="search-x" style="width: 48px; height: 48px; margin: 0 auto 16px; display: block; opacity: 0.5;"></i>
+                <p>Không tìm thấy ngành học nào phù hợp với yêu cầu của bạn.</p>
+                <button class="btn btn-orange mt-4" onclick="document.getElementById('major-search-input').value=''; document.querySelector('.filter-chip[data-category=\'all\']').click();">Xóa bộ lọc</button>
+              `;
+              majorsGrid.appendChild(msg);
+              lucide.createIcons();
+            }
+            document.querySelector('.pagination-container').style.display = 'none';
+          } else {
+            if (existingNoResults) existingNoResults.remove();
+            document.querySelector('.pagination-container').style.display = 'flex';
+          }
+        }
+
+        // Search events
+        searchBtn.addEventListener('click', () => {
+          currentSearchTerm = searchInput.value.trim();
+          currentPage = 1; // Reset to page 1 on new search
+          updatePaginationUI();
+          filterMajors();
+        });
+
+        searchInput.addEventListener('keyup', (e) => {
+          currentSearchTerm = searchInput.value.trim();
+          currentPage = 1; // Reset to page 1 on new search
+          updatePaginationUI();
+          filterMajors();
+        });
+
+        // Filter events
+        filterChips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            // Update active state
+            filterChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+
+            currentCategory = chip.getAttribute('data-category');
+            currentPage = 1; // Reset to page 1 on new filter
+            updatePaginationUI();
+            filterMajors();
+          });
+        });
+
+        // Pagination events
+        const paginationBtns = document.querySelectorAll('.pagination-btn[data-page]');
+        paginationBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentPage = parseInt(btn.getAttribute('data-page'));
+            updatePaginationUI();
+            filterMajors();
+            // Scroll to top of majors list
+            document.querySelector('.majors-list').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+
+        const nextPageBtn = document.getElementById('next-page');
+        nextPageBtn.addEventListener('click', () => {
+          const totalVisible = Array.from(majorCards).filter(card => {
+            const category = card.getAttribute('data-category');
+            const title = card.getAttribute('data-title').toLowerCase();
+            return (currentCategory === 'all' || category === currentCategory) && title.includes(currentSearchTerm.toLowerCase());
+          }).length;
+          
+          const totalPages = Math.ceil(totalVisible / itemsPerPage);
+          
+          if (currentPage < totalPages) {
+            currentPage++;
+            updatePaginationUI();
+            filterMajors();
+            document.querySelector('.majors-list').scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+
+        function updatePaginationUI() {
+          document.querySelectorAll('.pagination-btn[data-page]').forEach(btn => {
+            if (parseInt(btn.getAttribute('data-page')) === currentPage) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+
+        // Initial filter
+        filterMajors();
+      });
+    </script>
+  </body>
+</html>

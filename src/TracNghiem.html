@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trắc Nghiệm Định Hướng Nghề Nghiệp - CareerNest</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/TracNghiem.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="top-bar">
+        <div class="container flex justify-between items-center">
+          <div class="flex gap-6">
+            <div class="flex items-center gap-2">
+              <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
+              <span>contact@careernest.vn</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="#" id="language-switcher" class="flex items-center gap-2">
+              <i data-lucide="globe" style="width: 14px;"></i>
+              <span data-i18n="lang-text">Tiếng Việt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="container flex justify-between items-center">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i data-lucide="brain"></i></div>
+            <div class="logo-text">
+              <span class="logo-name">CareerNest</span>
+              <span class="logo-tagline">Future Builder</span>
+            </div>
+          </a>
+          
+          <div class="nav-links">
+            <a href="index.html" class="nav-link" data-i18n="nav-home">Trang chủ</a>
+            <a href="aboutus.html" class="nav-link" data-i18n="nav-about">Về CareerNest</a>
+            <a href="Nganhhoc.html" class="nav-link" data-i18n="nav-majors">Ngành học</a>
+            <a href="TracNghiem.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-test">Trắc nghiệm</a>
+            <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <a href="Login.html" class="btn btn-orange" data-i18n="nav-login">Đăng nhập</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="quiz-hero">
+        <div class="container">
+          <h1 style="font-size: 2.5rem; color: var(--color-brand-blue); margin-bottom: 16px;">Khám Phá Bản Thân</h1>
+          <p style="color: var(--color-slate-600); max-width: 600px; margin: 0 auto;">Trả lời các câu hỏi dưới đây một cách trung thực nhất để tìm ra ngành nghề phù hợp với tính cách và sở thích của bạn.</p>
+        </div>
+      </section>
+
+      <section class="container">
+        <div class="quiz-container" id="quiz-view">
+          <div class="progress-wrapper">
+            <div class="progress-info">
+              <span id="progress-text">Câu hỏi 1 / 12</span>
+              <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="question-area">
+            <h2 class="question-text" id="question-text">Đang tải câu hỏi...</h2>
+            <div class="options-grid" id="options-container">
+              <!-- Options will be injected here -->
+            </div>
+          </div>
+
+          <div class="quiz-controls">
+            <button class="btn" id="prev-btn" style="background: var(--color-slate-100); color: var(--color-slate-600); visibility: hidden;">
+              <i data-lucide="arrow-left"></i>
+              Quay lại
+            </button>
+            <button class="btn btn-orange" id="next-btn" disabled>
+              Tiếp theo
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-container" id="result-view" style="display: none;">
+          <div class="result-header">
+            <div style="width: 80px; height: 80px; background: var(--color-brand-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 24px;">
+              <i data-lucide="award" style="width: 40px; height: 40px;"></i>
+            </div>
+            <h2 style="font-size: 32px; color: var(--color-brand-blue); margin-bottom: 8px;">Kết Quả Của Bạn</h2>
+            <p style="color: var(--color-slate-500);">Dựa trên câu trả lời của bạn, đây là nhóm tính cách nổi trội nhất:</p>
+          </div>
+
+          <div class="result-card">
+            <h3 class="result-title" id="result-category-name">Nhóm Kỹ Thuật (Realistic)</h3>
+            <p id="result-category-desc">Bạn là người thực tế, thích làm việc với máy móc, công cụ, thực vật hoặc động vật. Bạn thích các hoạt động ngoài trời và giải quyết các vấn đề cụ thể.</p>
+            
+            <div class="career-list" id="suggested-careers">
+              <!-- Careers will be injected here -->
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-orange" onclick="location.reload()">Làm lại trắc nghiệm</button>
+            <button class="btn" id="ask-ai-btn" style="border: 2px solid var(--color-brand-orange); color: var(--color-brand-orange);">
+              <i data-lucide="sparkles"></i>
+              Hỏi AI về kết quả này
+            </button>
+            <a href="Nganhhoc.html" class="btn" style="border: 2px solid var(--color-brand-blue); color: var(--color-brand-blue);">Xem tất cả ngành học</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="logo-icon" style="width: 32px; height: 32px;"><i data-lucide="brain" style="width: 18px;"></i></div>
+              <span class="footer-logo-name">CareerNest</span>
+            </div>
+            <p>Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
+            <div class="social-links">
+              <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+              <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+              <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-title">Khám Phá</h4>
+            <ul class="footer-links">
+              <li><a href="aboutus.html">Về CareerNest</a></li>
+              <li><a href="TracNghiem.html">Bài trắc nghiệm</a></li>
+              <li><a href="Nganhhoc.html">Ngành học</a></li>
+              <li><a href="Blogs.html">Blogs</a></li>
+              <li><a href="Admin.html">Quản trị</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-title">Liên Hệ</h4>
+            <ul class="footer-links">
+              <li class="flex items-center gap-3"><i data-lucide="map-pin" style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
+              <li class="flex items-center gap-3"><i data-lucide="phone" style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
+              <li class="flex items-center gap-3"><i data-lucide="mail" style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
+          <p>© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/language.js"></script>
+    <script type="module" src="/assets/js/ai-assistant.js"></script>
+    <script>
+      lucide.createIcons();
+
+      const questions = [
+        { id: 1, category: 'R', text: "Bạn thích sửa chữa các đồ dùng điện hoặc máy móc trong nhà?" },
+        { id: 2, category: 'R', text: "Bạn thích làm việc với các công cụ, thiết bị kỹ thuật?" },
+        { id: 3, category: 'I', text: "Bạn thích tìm hiểu về các hiện tượng khoa học và tự nhiên?" },
+        { id: 4, category: 'I', text: "Bạn thích giải quyết các bài toán phức tạp hoặc câu đố logic?" },
+        { id: 5, category: 'A', text: "Bạn thích vẽ tranh, thiết kế hoặc các hoạt động sáng tạo nghệ thuật?" },
+        { id: 6, category: 'A', text: "Bạn thích viết lách, làm thơ hoặc sáng tác nhạc?" },
+        { id: 7, category: 'S', text: "Bạn thích giúp đỡ người khác vượt qua khó khăn?" },
+        { id: 8, category: 'S', text: "Bạn thích tham gia các hoạt động tình nguyện, cộng đồng?" },
+        { id: 9, category: 'E', text: "Bạn thích thuyết phục người khác đồng ý với quan điểm của mình?" },
+        { id: 10, category: 'E', text: "Bạn thích dẫn dắt, quản lý một nhóm để hoàn thành mục tiêu?" },
+        { id: 11, category: 'C', text: "Bạn thích làm việc với các con số, dữ liệu và bảng biểu?" },
+        { id: 12, category: 'C', text: "Bạn thích sắp xếp mọi thứ ngăn nắp và theo một quy trình rõ ràng?" }
+      ];
+
+      const categories = {
+        'R': {
+          name: 'Nhóm Kỹ Thuật (Realistic)',
+          desc: 'Bạn là người thực tế, thích làm việc với máy móc, công cụ, thực vật hoặc động vật. Bạn thích các hoạt động ngoài trời và giải quyết các vấn đề cụ thể.',
+          careers: ['Kỹ sư cơ khí', 'Kỹ thuật viên điện', 'Kiến trúc sư', 'Nông nghiệp công nghệ cao', 'Công nghệ ô tô']
+        },
+        'I': {
+          name: 'Nhóm Nghiên Cứu (Investigative)',
+          desc: 'Bạn thích quan sát, học hỏi, tìm tòi, phân tích và giải quyết vấn đề. Bạn thường có tư duy logic và thích làm việc độc lập.',
+          careers: ['Nhà khoa học', 'Lập trình viên', 'Bác sĩ', 'Nhà kinh tế học', 'Phân tích dữ liệu']
+        },
+        'A': {
+          name: 'Nhóm Nghệ Thuật (Artistic)',
+          desc: 'Bạn là người sáng tạo, trực giác và giàu trí tưởng tượng. Bạn thích làm việc trong môi trường không gò bó và thể hiện bản thân qua nghệ thuật.',
+          careers: ['Thiết kế đồ họa', 'Đạo diễn', 'Nhà văn', 'Kiến trúc sư cảnh quan', 'Truyền thông đa phương tiện']
+        },
+        'S': {
+          name: 'Nhóm Xã Hội (Social)',
+          desc: 'Bạn thích làm việc với con người, giúp đỡ, huấn luyện hoặc chăm sóc người khác. Bạn có khả năng giao tiếp tốt và giàu lòng trắc ẩn.',
+          careers: ['Giáo viên', 'Bác sĩ tâm lý', 'Nhân viên công tác xã hội', 'Quản trị nhân sự', 'Hướng dẫn viên du lịch']
+        },
+        'E': {
+          name: 'Nhóm Quản Lý (Enterprising)',
+          desc: 'Bạn là người tự tin, quyết đoán và có khả năng lãnh đạo. Bạn thích thuyết phục người khác và làm việc hướng tới mục tiêu kinh tế.',
+          careers: ['Quản trị kinh doanh', 'Marketing', 'Luật sư', 'Bất động sản', 'Chuyên viên bán hàng']
+        },
+        'C': {
+          name: 'Nhóm Nghiệp Vụ (Conventional)',
+          desc: 'Bạn là người cẩn thận, tỉ mỉ và thích làm việc với dữ liệu, con số. Bạn thích môi trường làm việc có quy tắc và trật tự rõ ràng.',
+          careers: ['Kế toán', 'Kiểm toán', 'Thủ quỹ', 'Quản lý kho', 'Thư ký hành chính']
+        }
+      };
+
+      const options = [
+        { text: "Rất không thích", score: 1 },
+        { text: "Không thích", score: 2 },
+        { text: "Bình thường", score: 3 },
+        { text: "Thích", score: 4 },
+        { text: "Rất thích", score: 5 }
+      ];
+
+      let currentQuestionIndex = 0;
+      let answers = new Array(questions.length).fill(null);
+
+      const questionText = document.getElementById('question-text');
+      const optionsContainer = document.getElementById('options-container');
+      const progressText = document.getElementById('progress-text');
+      const progressPercent = document.getElementById('progress-percent');
+      const progressFill = document.getElementById('progress-fill');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const quizView = document.getElementById('quiz-view');
+      const resultView = document.getElementById('result-view');
+
+      function updateUI() {
+        const question = questions[currentQuestionIndex];
+        questionText.textContent = question.text;
+        
+        optionsContainer.innerHTML = '';
+        options.forEach((opt, index) => {
+          const btn = document.createElement('button');
+          btn.className = `option-btn ${answers[currentQuestionIndex] === opt.score ? 'selected' : ''}`;
+          btn.innerHTML = `
+            <div class="option-circle"></div>
+            <span>${opt.text}</span>
+          `;
+          btn.onclick = () => selectOption(opt.score);
+          optionsContainer.appendChild(btn);
+        });
+
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        progressText.textContent = `Câu hỏi ${currentQuestionIndex + 1} / ${questions.length}`;
+        progressPercent.textContent = `${Math.round(progress)}%`;
+        progressFill.style.width = `${progress}%`;
+
+        prevBtn.style.visibility = currentQuestionIndex === 0 ? 'hidden' : 'visible';
+        nextBtn.disabled = answers[currentQuestionIndex] === null;
+        nextBtn.innerHTML = currentQuestionIndex === questions.length - 1 ? 
+          'Xem kết quả <i data-lucide="check"></i>' : 
+          'Tiếp theo <i data-lucide="arrow-right"></i>';
+        
+        lucide.createIcons();
+      }
+
+      function selectOption(score) {
+        answers[currentQuestionIndex] = score;
+        updateUI();
+      }
+
+      nextBtn.onclick = () => {
+        if (currentQuestionIndex < questions.length - 1) {
+          currentQuestionIndex++;
+          updateUI();
+        } else {
+          showResult();
+        }
+      };
+
+      prevBtn.onclick = () => {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          updateUI();
+        }
+      };
+
+      function showResult() {
+        const scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+        questions.forEach((q, i) => {
+          scores[q.category] += answers[i];
+        });
+
+        let maxCategory = 'R';
+        let maxScore = -1;
+        for (const cat in scores) {
+          if (scores[cat] > maxScore) {
+            maxScore = scores[cat];
+            maxCategory = cat;
+          }
+        }
+
+        const result = categories[maxCategory];
+        document.getElementById('result-category-name').textContent = result.name;
+        document.getElementById('result-category-desc').textContent = result.desc;
+        
+        const careerContainer = document.getElementById('suggested-careers');
+        careerContainer.innerHTML = '';
+        result.careers.forEach(career => {
+          const item = document.createElement('div');
+          item.className = 'career-item';
+          item.innerHTML = `
+            <i data-lucide="check-circle" class="career-icon"></i>
+            <span>${career}</span>
+          `;
+          careerContainer.appendChild(item);
+        });
+
+        quizView.style.display = 'none';
+        resultView.style.display = 'block';
+        
+        // Smooth scroll to results
+        setTimeout(() => {
+          resultView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+        
+        lucide.createIcons();
+
+        // AI Integration
+        const askAiBtn = document.getElementById('ask-ai-btn');
+        if (askAiBtn) {
+          askAiBtn.onclick = () => {
+            const prompt = `Tôi vừa làm bài trắc nghiệm Holland và nhận được kết quả là: ${result.name}. ${result.desc} Các ngành nghề gợi ý là: ${result.careers.join(', ')}. Bạn có thể tư vấn thêm cho tôi về lộ trình phát triển và các kỹ năng cần thiết cho nhóm ngành này không?`;
+            if (window.askCareerAI) {
+              window.askCareerAI(prompt);
+            } else {
+              alert("Trợ lý AI đang khởi động, vui lòng thử lại sau giây lát.");
+            }
+          };
+        }
+      }
+
+      updateUI();
+    </script>
+  </body>
+</html>
