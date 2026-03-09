@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': path.resolve(__dirname, '.')
       },
     },
     server: {
@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
-      outDir: '../dist',
+      outDir: 'dist',
       emptyOutDir: true,
     }
   };
