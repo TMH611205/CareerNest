@@ -18,7 +18,7 @@
 
 <body>
 
-    <div class="container login-container d-flex justify-content-center align-items-center">
+    <div class="container login-container d-flex justify-content-center align-items-center" id="signup">
         <div class="row login-card shadow-lg bg-white w-100" style="max-width: 900px;">
             <div class="back-wrapper">
                 <a href="index.html" class="back-home">
@@ -46,13 +46,13 @@
 
                     <div id="error" class="text-danger text-center mb-3"></div>
 
-                    <form id="loginForm">
+                    <form method="post" action="login.php" id="loginForm">
 
                         <div class="mb-3 input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-person-fill"></i>
                             </span>
-                            <input type="text" id="username" class="form-control" placeholder="Tên đăng nhập">
+                            <input type="text" id="username" class="form-control" placeholder="Tên đăng nhập" autofocus > 
                         </div>
 
                         <div class="mb-3 input-group">
@@ -76,7 +76,7 @@
 
                         <div class="text-center mt-4">
                             <span class="text-muted">Chưa có tài khoản? </span>
-                            <a href="#" class="register-link">Đăng ký ngay</a>
+                            <a href="Register.html" class="register-link">Đăng ký ngay</a>
                         </div>
 
                     </form>
