@@ -1,33 +1,53 @@
-// Initialize Lucide Icons
-lucide.createIcons();
+document.getElementById("register-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-// Password Visibility Toggle
-const togglePassword = (inputId, iconId) => {
-  const passwordInput = document.getElementById(inputId);
-  const icon = document.querySelector(`#${iconId}`);
+    const fullName = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
   
-  if (passwordInput && icon) {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    
-    // Update icon
-    const iconName = type === 'password' ? 'eye' : 'eye-off';
-    icon.setAttribute('data-lucide', iconName);
-    lucide.createIcons();
-  }
-};
+    if (!fullName || !email || !password || !confirmPassword) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+    }
 
-const registerForm = document.getElementById('register-form');
-registerForm?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirm-password').value;
+    if (password !== confirmPassword) {
+        alert("Mật khẩu xác nhận không khớp!");
+        return;
+    }
 
-  if (password !== confirmPassword) {
-    alert('Mật khẩu xác nhận không khớp!');
-    return;
-  }
+    if (password.length < 6) {
+        alert("Mật khẩu phải ít nhất 6 ký tự!");
+        return;
+    }
 
-  alert('Đăng ký thành công! (Đây là bản demo)');
-  window.location.href = 'Login.html';
+    try {
+        const response = await fetch("http://localhost:9999/CareerNest/CareerNest_Backend/api/register.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fullName: fullName,
+                email: email,
+                password: password
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.message === "Đăng ký thành công") {
+            alert("Đăng ký thành công 🎉");
+
+            // chuyển sang login
+            window.location.href = "Login.html";
+        } else {
+            alert(result.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Không kết nối được server!");
+    }
 });
