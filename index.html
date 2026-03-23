@@ -1,346 +1,380 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CareerNest - Định hướng đúng, Tương lai sáng</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-  </head>
-  <body>
-    <div class="bg-pattern"></div>
 
-    <header class="header">
-      <div class="top-bar hidden-mobile">
-        <div class="container flex justify-between items-center">
-          <div class="flex gap-6">
-            <div class="flex items-center gap-2">
-              <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
-              <span>contact@careernest.vn</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="phone" style="color: var(--color-brand-orange); width: 14px;"></i>
-              <span>+84 (028) 1234 5678</span>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerNest - Định hướng đúng, Tương lai sáng</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+
+</head>
+
+<body>
+  <div class="bg-pattern"></div>
+
+  <header class="header">
+    <div class="top-bar hidden-mobile">
+      <div class="container flex justify-between items-center">
+        <div class="flex gap-6">
+          <div class="flex items-center gap-2">
+            <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
+            <span>contact@careernest.vn</span>
           </div>
-          <div class="flex items-center gap-4">
-            <a href="#"><i data-lucide="facebook" style="width: 14px;"></i></a>
-            <a href="#"><i data-lucide="twitter" style="width: 14px;"></i></a>
-            <a href="#"><i data-lucide="instagram" style="width: 14px;"></i></a>
-            <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
-            <a href="#" id="language-switcher" class="flex items-center gap-2">
-              <i data-lucide="globe" style="width: 14px;"></i>
-              <span data-i18n="lang-text">Tiếng Việt</span>
+          <div class="flex items-center gap-2">
+            <i data-lucide="phone" style="color: var(--color-brand-orange); width: 14px;"></i>
+            <span>+84 (028) 1234 5678</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#"><i data-lucide="facebook" style="width: 14px;"></i></a>
+          <a href="#"><i data-lucide="twitter" style="width: 14px;"></i></a>
+          <a href="#"><i data-lucide="instagram" style="width: 14px;"></i></a>
+          <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
+          <a href="#" id="language-switcher" class="flex items-center gap-2">
+            <i data-lucide="globe" style="width: 14px;"></i>
+            <span data-i18n="lang-text">Tiếng Việt</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <div class="container flex justify-between items-center">
+        <a href="Index.html" style="display:flex;align-items:center;gap:8px;">
+          <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
+          <div>
+            <div style="font-weight:800;font-size:18px;">
+              <span class="career">Career</span><span class="nest">Nest</span>
+            </div>
+            <div class="logo-tagline">Future Builder</div>
+          </div>
+        </a>
+
+        <div class="nav-links hidden-mobile">
+          <a href="index.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-home">Trang
+            chủ</a>
+          <a href="aboutus.html" class="nav-link" data-i18n="nav-about">Về CareerNest</a>
+          <a href="Nganhhoc.html" class="nav-link" data-i18n="nav-majors">Ngành học</a>
+          <a href="TracNghiem.html" class="nav-link" data-i18n="nav-test">Trắc nghiệm</a>
+          <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button class="hidden-mobile" style="color: var(--color-slate-400);"><i data-lucide="search"></i></button>
+          <div id="auth-area" class="hidden-mobile" style="display: flex; align-items: center; gap: 10px;">
+          </div>
+          <a href="TracNghiem.html" class="btn btn-orange" data-i18n="btn-start">Bắt đầu ngay</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home-view">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-gradient"></div>
+      <div class="container">
+        <div class="reveal-left" style="max-width: 600px;">
+          <h1 class="hero-title" data-i18n="hero-title">Chọn Ngành Đúng,<br><span>Bắt Đầu Tương Lai Sáng!</span></h1>
+          <p class="hero-desc" data-i18n="hero-desc">Hệ thống <strong>CareerNest</strong> giúp bạn khám phá ngành học
+            phù hợp với sở thích, tính cách và năng lực của mình.</p>
+
+          <form class="hero-search-form" action="Blogs.html" method="GET">
+            <input type="text" name="q" class="hero-search-input" placeholder="Tìm kiếm bài viết, ngành học..."
+              data-i18n="hero-search-placeholder">
+            <button type="submit" class="btn btn-orange" style="padding: 10px 20px;" data-i18n="hero-search-btn">
+              Tìm kiếm
+            </button>
+          </form>
+
+          <div style="margin-top: 24px;">
+            <a href="TracNghiem.html" class="btn btn-orange" style="padding: 16px 32px; font-size: 18px;"
+              data-i18n="hero-discover-btn">
+              Khám Phá Ngay
+              <i data-lucide="arrow-right"></i>
             </a>
           </div>
         </div>
       </div>
+    </section>
 
-      <nav class="navbar">
-        <div class="container flex justify-between items-center">
-          <a href="Index.html" style="display:flex;align-items:center;gap:8px;">
-                        <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
-                        <div>
-                            <div style="font-weight:800;font-size:18px;">
-                                <span class="career">Career</span><span class="nest">Nest</span>
-                            </div>
-                            <div class="logo-tagline">Future Builder</div>
-                        </div>
-                    </a>
-          
-          <div class="nav-links hidden-mobile">
-            <a href="index.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-home">Trang chủ</a>
-            <a href="aboutus.html" class="nav-link" data-i18n="nav-about">Về CareerNest</a>
-            <a href="Nganhhoc.html" class="nav-link" data-i18n="nav-majors">Ngành học</a>
-            <a href="TracNghiem.html" class="nav-link" data-i18n="nav-test">Trắc nghiệm</a>
-            <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <button class="hidden-mobile" style="color: var(--color-slate-400);"><i data-lucide="search"></i></button>
-            <a href="Login.html" class="nav-link hidden-mobile" style="font-weight: 700; margin-right: 10px;" data-i18n="nav-login">Đăng nhập</a>
-            <a href="TracNghiem.html" class="btn btn-orange" data-i18n="btn-start">Bắt đầu ngay</a>
-          </div>
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container grid grid-cols-4 gap-8">
+        <div class="reveal-up">
+          <div class="stat-number">50,000+</div>
+          <div class="stat-label">Học sinh tham gia</div>
         </div>
-      </nav>
-    </header>
-
-    <main id="home-view">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-gradient"></div>
-        <div class="container">
-          <div class="reveal-left" style="max-width: 600px;">
-            <h1 class="hero-title" data-i18n="hero-title">Chọn Ngành Đúng,<br><span>Bắt Đầu Tương Lai Sáng!</span></h1>
-            <p class="hero-desc" data-i18n="hero-desc">Hệ thống <strong>CareerNest</strong> giúp bạn khám phá ngành học phù hợp với sở thích, tính cách và năng lực của mình.</p>
-            
-            <form class="hero-search-form" action="Blogs.html" method="GET">
-              <input type="text" name="q" class="hero-search-input" placeholder="Tìm kiếm bài viết, ngành học..." data-i18n="hero-search-placeholder">
-              <button type="submit" class="btn btn-orange" style="padding: 10px 20px;" data-i18n="hero-search-btn">
-                Tìm kiếm
-              </button>
-            </form>
-
-            <div style="margin-top: 24px;">
-              <a href="TracNghiem.html" class="btn btn-orange" style="padding: 16px 32px; font-size: 18px;" data-i18n="hero-discover-btn">
-                Khám Phá Ngay
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
+        <div class="reveal-up">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Ngành học chi tiết</div>
         </div>
-      </section>
-
-      <!-- STATS -->
-      <section class="stats">
-        <div class="container grid grid-cols-4 gap-8">
-          <div class="reveal-up">
-            <div class="stat-number">50,000+</div>
-            <div class="stat-label">Học sinh tham gia</div>
-          </div>
-          <div class="reveal-up">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Ngành học chi tiết</div>
-          </div>
-          <div class="reveal-up">
-            <div class="stat-number">200+</div>
-            <div class="stat-label">Trường đại học</div>
-          </div>
-          <div class="reveal-up">
-            <div class="stat-number">98%</div>
-            <div class="stat-label">Tỉ lệ hài lòng</div>
-          </div>
+        <div class="reveal-up">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Trường đại học</div>
         </div>
-      </section>
-
-      <!-- FEATURES -->
-      <section class="features">
-        <div class="container">
-          <div class="section-header reveal-up">
-            <h2 class="section-title">Tại Sao Chọn CareerNest?</h2>
-            <p class="section-desc">Công cụ hỗ trợ khám phá bản thân và định hướng sự nghiệp.</p>
-          </div>
-          <div class="grid grid-cols-4 gap-6">
-            <div class="feature-card reveal-up">
-              <div class="feature-icon"><i data-lucide="brain"></i></div>
-              <h3>Phân tích tính cách</h3>
-            </div>
-            <div class="feature-card reveal-up">
-              <div class="feature-icon"><i data-lucide="target"></i></div>
-              <h3>Đề xuất chính xác</h3>
-            </div>
-            <div class="feature-card reveal-up">
-              <div class="feature-icon"><i data-lucide="briefcase"></i></div>
-              <h3>So sánh nghề nghiệp</h3>
-            </div>
-            <div class="feature-card reveal-up">
-              <div class="feature-icon"><i data-lucide="book-open"></i></div>
-              <h3>Học liệu bổ ích</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TESTIMONIALS -->
-      <section class="testimonials">
-        <div class="container">
-          <div class="section-header reveal-up">
-            <h2 class="section-title">Đánh Giá Từ Người Dùng</h2>
-            <p class="section-desc">Hàng ngàn học sinh, sinh viên đã tìm thấy định hướng đúng đắn nhờ CareerNest.</p>
-          </div>
-          <div class="testimonial-grid">
-            <div class="testimonial-card reveal-up">
-              <div class="quote-icon">"</div>
-              <p class="testimonial-quote">"Nhờ CareerNest mà mình đã tìm thấy đam mê thực sự với ngành Công nghệ thông tin. Các bài trắc nghiệm rất sát thực tế!"</p>
-              <div class="testimonial-user">
-                <img src="https://i.pravatar.cc/150?u=an" alt="User An" class="testimonial-avatar" referrerPolicy="no-referrer">
-                <div class="testimonial-info">
-                  <h4>Nguyễn Văn An</h4>
-                  <p>Học sinh lớp 12</p>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card reveal-up">
-              <div class="quote-icon">"</div>
-              <p class="testimonial-quote">"Trang web rất dễ sử dụng, giao diện đẹp và kết quả trắc nghiệm khá sát với tính cách của mình. Rất đáng trải nghiệm!"</p>
-              <div class="testimonial-user">
-                <img src="https://i.pravatar.cc/150?u=binh" alt="User Binh" class="testimonial-avatar" referrerPolicy="no-referrer">
-                <div class="testimonial-info">
-                  <h4>Trần Thị Bình</h4>
-                  <p>Sinh viên năm nhất</p>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card reveal-up">
-              <div class="quote-icon">"</div>
-              <p class="testimonial-quote">"Thông tin về các trường đại học và ngành học rất chi tiết. Mình đã có cái nhìn tổng quan hơn về tương lai nghề nghiệp."</p>
-              <div class="testimonial-user">
-                <img src="https://i.pravatar.cc/150?u=cuong" alt="User Cuong" class="testimonial-avatar" referrerPolicy="no-referrer">
-                <div class="testimonial-info">
-                  <h4>Lê Văn Cường</h4>
-                  <p>Học sinh lớp 11</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section class="faq">
-        <div class="container faq-container">
-          <div class="section-header reveal-up">
-            <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
-          </div>
-          <div id="faq-container">
-            <div class="faq-item reveal-up">
-              <button class="faq-trigger">
-                <span>Bài trắc nghiệm có mất phí không?</span>
-                <i data-lucide="plus" class="faq-icon"></i>
-              </button>
-              <div class="faq-content">Hoàn toàn miễn phí! CareerNest mong muốn hỗ trợ tối đa cho các bạn học sinh trong việc định hướng tương lai.</div>
-            </div>
-            <div class="faq-item reveal-up">
-              <button class="faq-trigger">
-                <span>Kết quả có chính xác không?</span>
-                <i data-lucide="plus" class="faq-icon"></i>
-              </button>
-              <div class="faq-content">Kết quả dựa trên các mô hình tâm lý học uy tín (như Holland, Big Five) và dữ liệu nghề nghiệp thực tế tại Việt Nam, mang lại độ tin cậy cao.</div>
-            </div>
-            <div class="faq-item reveal-up">
-              <button class="faq-trigger">
-                <span>Mất bao lâu để hoàn thành trắc nghiệm?</span>
-                <i data-lucide="plus" class="faq-icon"></i>
-              </button>
-              <div class="faq-content">Thông thường bạn chỉ mất khoảng 10-15 phút để hoàn thành các câu hỏi một cách thoải mái nhất.</div>
-            </div>
-            <div class="faq-item reveal-up">
-              <button class="faq-trigger">
-                <span>Tôi có thể làm lại trắc nghiệm không?</span>
-                <i data-lucide="plus" class="faq-icon"></i>
-              </button>
-              <div class="faq-content">Có, bạn có thể làm lại sau một khoảng thời gian (ví dụ 6 tháng) để thấy được sự thay đổi trong sở thích và định hướng của bản thân.</div>
-            </div>
-            <div class="faq-item reveal-up">
-              <button class="faq-trigger">
-                <span>Dữ liệu của tôi có được bảo mật không?</span>
-                <i data-lucide="plus" class="faq-icon"></i>
-              </button>
-              <div class="faq-content">CareerNest cam kết bảo mật tuyệt đối thông tin cá nhân và kết quả trắc nghiệm của bạn, chỉ sử dụng cho mục đích gợi ý nghề nghiệp.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-             <div class="footer-logo">
-              <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
-              <span class="footer-logo-name"><span class="career">Career</span><span class="nest">Nest</span></span>
-            </div>
-            <p data-i18n="footer-desc">Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
-            <div class="social-links">
-              <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
-              <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
-              <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-            </div>
-          </div>
-          <div>
-            <h4 class="footer-title" data-i18n="footer-explore">Khám Phá</h4>
-            <ul class="footer-links">
-              <li><a href="aboutus.html" data-i18n="nav-about">Về CareerNest</a></li>
-              <li><a href="TracNghiem.html" data-i18n="nav-test">Bài trắc nghiệm</a></li>
-              <li><a href="Nganhhoc.html" data-i18n="nav-majors">Ngành học</a></li>
-              <li><a href="Blogs.html" data-i18n="nav-blogs">Blogs</a></li>
-              <li><a href="Admin.html">Quản trị</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="footer-title" data-i18n="footer-contact">Liên Hệ</h4>
-            <ul class="footer-links">
-              <li class="flex items-center gap-3"><i data-lucide="map-pin" style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
-              <li class="flex items-center gap-3"><i data-lucide="phone" style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
-              <li class="flex items-center gap-3"><i data-lucide="mail" style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
-            </ul>
-          </div>
-        </div>
-        <div style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
-          <p data-i18n="footer-rights">© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+        <div class="reveal-up">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Tỉ lệ hài lòng</div>
         </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title">Tại Sao Chọn CareerNest?</h2>
+          <p class="section-desc">Công cụ hỗ trợ khám phá bản thân và định hướng sự nghiệp.</p>
+        </div>
+        <div class="grid grid-cols-4 gap-6">
+          <div class="feature-card reveal-up">
+            <div class="feature-icon"><i data-lucide="brain"></i></div>
+            <h3>Phân tích tính cách</h3>
+          </div>
+          <div class="feature-card reveal-up">
+            <div class="feature-icon"><i data-lucide="target"></i></div>
+            <h3>Đề xuất chính xác</h3>
+          </div>
+          <div class="feature-card reveal-up">
+            <div class="feature-icon"><i data-lucide="briefcase"></i></div>
+            <h3>So sánh nghề nghiệp</h3>
+          </div>
+          <div class="feature-card reveal-up">
+            <div class="feature-icon"><i data-lucide="book-open"></i></div>
+            <h3>Học liệu bổ ích</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title">Đánh Giá Từ Người Dùng</h2>
+          <p class="section-desc">Hàng ngàn học sinh, sinh viên đã tìm thấy định hướng đúng đắn nhờ CareerNest.</p>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon">"</div>
+            <p class="testimonial-quote">"Nhờ CareerNest mà mình đã tìm thấy đam mê thực sự với ngành Công nghệ thông
+              tin. Các bài trắc nghiệm rất sát thực tế!"</p>
+            <div class="testimonial-user">
+              <img src="https://i.pravatar.cc/150?u=an" alt="User An" class="testimonial-avatar"
+                referrerPolicy="no-referrer">
+              <div class="testimonial-info">
+                <h4>Nguyễn Văn An</h4>
+                <p>Học sinh lớp 12</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon">"</div>
+            <p class="testimonial-quote">"Trang web rất dễ sử dụng, giao diện đẹp và kết quả trắc nghiệm khá sát với
+              tính cách của mình. Rất đáng trải nghiệm!"</p>
+            <div class="testimonial-user">
+              <img src="https://i.pravatar.cc/150?u=binh" alt="User Binh" class="testimonial-avatar"
+                referrerPolicy="no-referrer">
+              <div class="testimonial-info">
+                <h4>Trần Thị Bình</h4>
+                <p>Sinh viên năm nhất</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon">"</div>
+            <p class="testimonial-quote">"Thông tin về các trường đại học và ngành học rất chi tiết. Mình đã có cái nhìn
+              tổng quan hơn về tương lai nghề nghiệp."</p>
+            <div class="testimonial-user">
+              <img src="https://i.pravatar.cc/150?u=cuong" alt="User Cuong" class="testimonial-avatar"
+                referrerPolicy="no-referrer">
+              <div class="testimonial-info">
+                <h4>Lê Văn Cường</h4>
+                <p>Học sinh lớp 11</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="container faq-container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+        </div>
+        <div id="faq-container">
+          <div class="faq-item reveal-up">
+            <button class="faq-trigger">
+              <span>Bài trắc nghiệm có mất phí không?</span>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </button>
+            <div class="faq-content">Hoàn toàn miễn phí! CareerNest mong muốn hỗ trợ tối đa cho các bạn học sinh trong
+              việc định hướng tương lai.</div>
+          </div>
+          <div class="faq-item reveal-up">
+            <button class="faq-trigger">
+              <span>Kết quả có chính xác không?</span>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </button>
+            <div class="faq-content">Kết quả dựa trên các mô hình tâm lý học uy tín (như Holland, Big Five) và dữ liệu
+              nghề nghiệp thực tế tại Việt Nam, mang lại độ tin cậy cao.</div>
+          </div>
+          <div class="faq-item reveal-up">
+            <button class="faq-trigger">
+              <span>Mất bao lâu để hoàn thành trắc nghiệm?</span>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </button>
+            <div class="faq-content">Thông thường bạn chỉ mất khoảng 10-15 phút để hoàn thành các câu hỏi một cách thoải
+              mái nhất.</div>
+          </div>
+          <div class="faq-item reveal-up">
+            <button class="faq-trigger">
+              <span>Tôi có thể làm lại trắc nghiệm không?</span>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </button>
+            <div class="faq-content">Có, bạn có thể làm lại sau một khoảng thời gian (ví dụ 6 tháng) để thấy được sự
+              thay đổi trong sở thích và định hướng của bản thân.</div>
+          </div>
+          <div class="faq-item reveal-up">
+            <button class="faq-trigger">
+              <span>Dữ liệu của tôi có được bảo mật không?</span>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </button>
+            <div class="faq-content">CareerNest cam kết bảo mật tuyệt đối thông tin cá nhân và kết quả trắc nghiệm của
+              bạn, chỉ sử dụng cho mục đích gợi ý nghề nghiệp.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
+            <span class="footer-logo-name"><span class="career">Career</span><span class="nest">Nest</span></span>
+          </div>
+          <p data-i18n="footer-desc">Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+            <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+            <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title" data-i18n="footer-explore">Khám Phá</h4>
+          <ul class="footer-links">
+            <li><a href="aboutus.html" data-i18n="nav-about">Về CareerNest</a></li>
+            <li><a href="TracNghiem.html" data-i18n="nav-test">Bài trắc nghiệm</a></li>
+            <li><a href="Nganhhoc.html" data-i18n="nav-majors">Ngành học</a></li>
+            <li><a href="Blogs.html" data-i18n="nav-blogs">Blogs</a></li>
+            <li><a href="Admin.html">Quản trị</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title" data-i18n="footer-contact">Liên Hệ</h4>
+          <ul class="footer-links">
+            <li class="flex items-center gap-3"><i data-lucide="map-pin"
+                style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
+            <li class="flex items-center gap-3"><i data-lucide="phone"
+                style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
+            <li class="flex items-center gap-3"><i data-lucide="mail"
+                style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
+        <p data-i18n="footer-rights">© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
 
 
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script type="module" src="assets/js/language.js"></script>
-    <script type="module" src="assets/js/ai-assistant.js"></script>
-    <script>
-      // Initialize Lucide Icons
-      lucide.createIcons();
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" src="assets/js/language.js"></script>
+  <script type="module" src="assets/js/ai-assistant.js"></script>
 
-      // FAQ Toggle Logic
-      const faqItems = document.querySelectorAll('.faq-item');
-      faqItems.forEach((item) => {
-        const trigger = item.querySelector('.faq-trigger');
-        const content = item.querySelector('.faq-content');
-        const icon = item.querySelector('.faq-icon');
+  <script>
+    checkLogin();
+  </script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
 
-        trigger?.addEventListener('click', () => {
-          const isOpen = content?.style.height === 'auto' || (content?.style.height !== '0px' && content?.style.height !== '');
-          
-          // Close all other items
-          faqItems.forEach((otherItem) => {
-            const otherContent = otherItem.querySelector('.faq-content');
-            const otherIcon = otherItem.querySelector('.faq-icon');
-            if (otherContent) {
-              otherContent.style.height = '0';
-              otherContent.style.opacity = '0';
-              otherContent.style.paddingTop = '0';
-              otherContent.style.paddingBottom = '0';
-            }
-            if (otherIcon) {
-              otherIcon.setAttribute('data-lucide', 'plus');
-            }
-          });
+    // FAQ Toggle Logic
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector('.faq-trigger');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
 
-          // Toggle current item
-          if (!isOpen && content && icon) {
-            content.style.height = 'auto';
-            content.style.opacity = '1';
-            content.style.paddingTop = '10px';
-            content.style.paddingBottom = '24px';
-            icon.setAttribute('data-lucide', 'minus');
+      trigger?.addEventListener('click', () => {
+        const isOpen = content?.style.height === 'auto' || (content?.style.height !== '0px' && content?.style.height !== '');
+
+        // Close all other items
+        faqItems.forEach((otherItem) => {
+          const otherContent = otherItem.querySelector('.faq-content');
+          const otherIcon = otherItem.querySelector('.faq-icon');
+          if (otherContent) {
+            otherContent.style.height = '0';
+            otherContent.style.opacity = '0';
+            otherContent.style.paddingTop = '0';
+            otherContent.style.paddingBottom = '0';
           }
-          
-          lucide.createIcons();
+          if (otherIcon) {
+            otherIcon.setAttribute('data-lucide', 'plus');
+          }
         });
+
+        // Toggle current item
+        if (!isOpen && content && icon) {
+          content.style.height = 'auto';
+          content.style.opacity = '1';
+          content.style.paddingTop = '10px';
+          content.style.paddingBottom = '24px';
+          icon.setAttribute('data-lucide', 'minus');
+        }
+
+        lucide.createIcons();
       });
+    });
 
-      // Scroll Reveal Animation
-      const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
 
-      revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach(el => observer.observe(el));
 
 
-    </script>
-  </body>
+  </script>
+  <script src="assets/js/auth.js"></script>
+
+  <script>
+    renderAuth();
+  </script>
+</body>
+
 </html>

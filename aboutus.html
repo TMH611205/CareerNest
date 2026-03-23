@@ -1,313 +1,364 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Về CareerNest - CareerNest</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/aboutus.css">
-  </head>
-  <body>
-    <div class="bg-pattern"></div>
 
-    <header class="header">
-      <div class="top-bar hidden-mobile">
-        <div class="container flex justify-between items-center">
-          <div class="flex gap-6">
-            <div class="flex items-center gap-2">
-              <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
-              <span>contact@careernest.vn</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="phone" style="color: var(--color-brand-orange); width: 14px;"></i>
-              <span>+84 (028) 1234 5678</span>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Về CareerNest - CareerNest</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/aboutus.css">
+</head>
+
+<body>
+  <div class="bg-pattern"></div>
+
+  <header class="header">
+    <div class="top-bar hidden-mobile">
+      <div class="container flex justify-between items-center">
+        <div class="flex gap-6">
+          <div class="flex items-center gap-2">
+            <i data-lucide="mail" style="color: var(--color-brand-orange); width: 14px;"></i>
+            <span>contact@careernest.vn</span>
           </div>
-          <div class="flex items-center gap-4">
-            <a href="#"><i data-lucide="facebook" style="width: 14px;"></i></a>
-            <a href="#"><i data-lucide="twitter" style="width: 14px;"></i></a>
-            <a href="#"><i data-lucide="instagram" style="width: 14px;"></i></a>
-            <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
-            <a href="#" id="language-switcher" class="flex items-center gap-2">
-              <i data-lucide="globe" style="width: 14px;"></i>
-              <span data-i18n="lang-text">Tiếng Việt</span>
-            </a>
+          <div class="flex items-center gap-2">
+            <i data-lucide="phone" style="color: var(--color-brand-orange); width: 14px;"></i>
+            <span>+84 (028) 1234 5678</span>
           </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#"><i data-lucide="facebook" style="width: 14px;"></i></a>
+          <a href="#"><i data-lucide="twitter" style="width: 14px;"></i></a>
+          <a href="#"><i data-lucide="instagram" style="width: 14px;"></i></a>
+          <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
+          <a href="#" id="language-switcher" class="flex items-center gap-2">
+            <i data-lucide="globe" style="width: 14px;"></i>
+            <span data-i18n="lang-text">Tiếng Việt</span>
+          </a>
         </div>
       </div>
+    </div>
 
-      <nav class="navbar">
-        <div class="container flex justify-between items-center">
-           <a href="Index.html" style="display:flex;align-items:center;gap:8px;">
-                        <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
-                        <div>
-                            <div style="font-weight:800;font-size:18px;">
-                                <span class="career">Career</span><span class="nest">Nest</span>
-                            </div>
-                            <div class="logo-tagline">Future Builder</div>
-                        </div>
-                    </a>
-          
-          <div class="nav-links hidden-mobile">
-            <a href="index.html" class="nav-link" data-i18n="nav-home">Trang chủ</a>
-            <a href="aboutus.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-about">Về CareerNest</a>
-            <a href="Nganhhoc.html" class="nav-link" data-i18n="nav-majors">Ngành học</a>
-            <a href="TracNghiem.html" class="nav-link" data-i18n="nav-test">Trắc nghiệm</a>
-            <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
+    <nav class="navbar">
+      <div class="container flex justify-between items-center">
+        <a href="Index.html" style="display:flex;align-items:center;gap:8px;">
+          <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
+          <div>
+            <div style="font-weight:800;font-size:18px;">
+              <span class="career">Career</span><span class="nest">Nest</span>
+            </div>
+            <div class="logo-tagline">Future Builder</div>
           </div>
+        </a>
 
-          <div class="flex items-center gap-4">
-            <button class="hidden-mobile" style="color: var(--color-slate-400);"><i data-lucide="search"></i></button>
-            <a href="Login.html" class="nav-link hidden-mobile" style="font-weight: 700; margin-right: 10px;" data-i18n="nav-login">Đăng nhập</a>
-            <button class="btn btn-orange" data-i18n="btn-start">Bắt đầu ngay</button>
-          </div>
+        <div class="nav-links hidden-mobile">
+          <a href="index.html" class="nav-link" data-i18n="nav-home">Trang chủ</a>
+          <a href="aboutus.html" class="nav-link" style="color: var(--color-brand-blue);" data-i18n="nav-about">Về
+            CareerNest</a>
+          <a href="Nganhhoc.html" class="nav-link" data-i18n="nav-majors">Ngành học</a>
+          <a href="TracNghiem.html" class="nav-link" data-i18n="nav-test">Trắc nghiệm</a>
+          <a href="Blogs.html" class="nav-link" data-i18n="nav-blogs">Blogs</a>
         </div>
-      </nav>
-    </header>
 
-    <main>
-      <section id="about-hero">
-        <div class="container">
-          <span class="hero-tag">Về CareerNest</span>
-          <h1 class="hero-title" style="font-size: 4rem; margin-bottom: 24px;">Kiến Tạo Tương Lai <br><span style="color: var(--color-brand-orange);">Cho Thế Hệ Trẻ</span></h1>
-          <p class="hero-desc" style="max-width: 800px; margin: 0 auto; font-size: 1.2rem; opacity: 0.9;">Chúng tôi không chỉ cung cấp thông tin, chúng tôi xây dựng lộ trình để mỗi bạn trẻ Việt Nam tự tin bước vào thế giới nghề nghiệp đầy biến động.</p>
+        <div class="flex items-center gap-4">
+          <button class="hidden-mobile" style="color: var(--color-slate-400);"><i data-lucide="search"></i></button>
+          <div id="auth-area" class="hidden-mobile" style="display: flex; align-items: center; gap: 10px;">
+          </div>
+          <button class="btn btn-orange" data-i18n="btn-start">Bắt đầu ngay</button>
         </div>
-      </section>
+      </div>
+    </nav>
+  </header>
 
-      <section class="about-content">
-        <div class="container">
-          <div class="about-grid">
-            <div class="about-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" alt="Team Collaboration" referrerPolicy="no-referrer">
-            </div>
-            <div>
-              <h2 class="section-title" style="text-align: left; margin-bottom: 24px;">Sứ Mệnh Của Chúng Tôi</h2>
-              <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; color: var(--color-slate-600);">CareerNest ra đời từ khát vọng giải quyết bài toán "khủng hoảng chọn ngành" của học sinh Việt Nam. Chúng tôi tin rằng, khi một cá nhân được đặt đúng vị trí, họ không chỉ thành công mà còn đóng góp tối đa cho xã hội.</p>
-              <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; color: var(--color-slate-600);">Với sự kết hợp giữa các học thuyết tâm lý học kinh điển (Holland, MBTI) và công nghệ phân tích dữ liệu hiện đại, CareerNest mang đến cái nhìn toàn diện và khách quan nhất về tiềm năng của mỗi người.</p>
-              
-              <div class="mission-card">
-                <div class="flex items-center gap-4" style="margin-bottom: 15px;">
-                  <div style="width: 40px; height: 40px; background: var(--color-brand-light-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-brand-orange);">
-                    <i data-lucide="target" style="width: 20px;"></i>
-                  </div>
-                  <h3 style="color: var(--color-brand-blue); margin: 0;">Tầm Nhìn 2030</h3>
-                </div>
-                <p style="font-style: italic; color: var(--color-slate-700);">"Trở thành nền tảng hướng nghiệp số 1 Đông Nam Á, đồng hành cùng 10 triệu thanh niên trên hành trình định vị bản thân và phát triển sự nghiệp bền vững."</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="stats-bar">
-            <div class="stat-item">
-              <div class="stat-number">50,000+</div>
-              <div class="stat-label">Người dùng tin tưởng</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">120+</div>
-              <div class="stat-label">Đối tác giáo dục</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">95%</div>
-              <div class="stat-label">Tỷ lệ hài lòng</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">15+</div>
-              <div class="stat-label">Giải thưởng uy tín</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Values Section -->
-      <section class="values-section">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">Giá Trị Cốt Lõi</h2>
-            <p class="section-desc">Nền tảng vững chắc giúp chúng tôi xây dựng niềm tin với cộng đồng.</p>
-          </div>
-          <div class="grid grid-cols-3 gap-8">
-            <div class="value-card">
-              <div class="value-icon"><i data-lucide="shield-check"></i></div>
-              <h3 style="margin-bottom: 12px;">Chính Trực</h3>
-              <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Chúng tôi cam kết cung cấp dữ liệu trung thực, khách quan và bảo mật tuyệt đối thông tin người dùng.</p>
-            </div>
-            <div class="value-card">
-              <div class="value-icon"><i data-lucide="users"></i></div>
-              <h3 style="margin-bottom: 12px;">Đồng Hành</h3>
-              <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Không chỉ là công cụ, chúng tôi là người bạn lắng nghe và thấu hiểu mọi trăn trở của bạn.</p>
-            </div>
-            <div class="value-card">
-              <div class="value-icon"><i data-lucide="trending-up"></i></div>
-              <h3 style="margin-bottom: 12px;">Đột Phá</h3>
-              <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Luôn tiên phong ứng dụng AI và Big Data để mang lại những giải pháp hướng nghiệp tối ưu nhất.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Team Section -->
-      <section class="team-section">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">Đội Ngũ Chuyên Gia</h2>
-            <p class="section-desc">Sự kết hợp giữa kinh nghiệm giáo dục và tư duy công nghệ đột phá.</p>
-          </div>
-          <div class="team-grid">
-            <div class="team-card">
-              <div class="team-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" class="team-img" alt="Founder" referrerPolicy="no-referrer">
-                <div class="team-socials">
-                  <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
-                  <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
-                </div>
-              </div>
-              <h3 class="team-name">TS. Lê Hoàng Nam</h3>
-              <p class="team-role">CEO & Founder</p>
-            </div>
-            <div class="team-card">
-              <div class="team-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" class="team-img" alt="Psychologist" referrerPolicy="no-referrer">
-                <div class="team-socials">
-                  <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
-                  <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
-                </div>
-              </div>
-              <h3 class="team-name">ThS. Nguyễn Mai Anh</h3>
-              <p class="team-role">Chuyên gia Tâm lý</p>
-            </div>
-            <div class="team-card">
-              <div class="team-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" class="team-img" alt="CTO" referrerPolicy="no-referrer">
-                <div class="team-socials">
-                  <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
-                  <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
-                </div>
-              </div>
-              <h3 class="team-name">Trần Minh Đức</h3>
-              <p class="team-role">Giám đốc Công nghệ</p>
-            </div>
-            <div class="team-card">
-              <div class="team-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" class="team-img" alt="Content Director" referrerPolicy="no-referrer">
-                <div class="team-socials">
-                  <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
-                  <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
-                </div>
-              </div>
-              <h3 class="team-name">Phạm Quỳnh Chi</h3>
-              <p class="team-role">Giám đốc Nội dung</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Partners Section -->
-      <section style="padding: 60px 0; background: var(--color-slate-50); border-top: 1px solid var(--color-slate-100); border-bottom: 1px solid var(--color-slate-100);">
-        <div class="container">
-          <p style="text-align: center; color: var(--color-slate-400); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px;">Đối tác chiến lược</p>
-          <div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Partner" style="height: 30px;" referrerPolicy="no-referrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="Partner" style="height: 30px;" referrerPolicy="no-referrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Partner" style="height: 30px;" referrerPolicy="no-referrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Partner" style="height: 30px;" referrerPolicy="no-referrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Partner" style="height: 25px;" referrerPolicy="no-referrer">
-          </div>
-        </div>
-      </section>
-
-      <!-- Timeline Section -->
-      <section class="about-content">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">Hành Trình Phát Triển</h2>
-            <p class="section-desc">Những cột mốc khẳng định sự trưởng thành và uy tín của CareerNest.</p>
-          </div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2022</div>
-              <h4 style="margin-bottom: 8px;">Khởi đầu tâm huyết</h4>
-              <p style="color: var(--color-slate-600);">CareerNest được thành lập bởi nhóm chuyên gia giáo dục và công nghệ với mong muốn thay đổi cách hướng nghiệp truyền thống.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023</div>
-              <h4 style="margin-bottom: 8px;">Bứt phá công nghệ</h4>
-              <p style="color: var(--color-slate-600);">Ra mắt hệ thống trắc nghiệm AI thế hệ mới, thu hút hơn 20,000 lượt sử dụng trong 6 tháng đầu tiên.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2024</div>
-              <h4 style="margin-bottom: 8px;">Mở rộng quy mô</h4>
-              <p style="color: var(--color-slate-600);">Hợp tác với 100+ trường THPT và Đại học, trở thành đối tác tin cậy của các tổ chức giáo dục quốc tế.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA Section -->
-      <section style="padding: 100px 0; background: var(--color-brand-blue); color: white; text-align: center;">
-        <div class="container">
-          <h2 style="font-size: 2.5rem; margin-bottom: 24px;">Sẵn sàng khám phá tiềm năng của bạn?</h2>
-          <p style="max-width: 600px; margin: 0 auto 40px; opacity: 0.8;">Hãy để CareerNest đồng hành cùng bạn trên con đường chinh phục ước mơ nghề nghiệp.</p>
-          <div class="flex justify-center gap-4">
-            <a href="TracNghiem.html" class="btn btn-orange" style="padding: 16px 32px; font-size: 1.1rem;">Làm trắc nghiệm ngay</a>
-            <a href="Nganhhoc.html" class="btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 16px 32px; font-size: 1.1rem;">Tìm hiểu ngành học</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
+  <main>
+    <section id="about-hero">
       <div class="container">
-        <div class="footer-grid">
-          <div>
-             <div class="footer-logo">
-              <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
-              <span class="footer-logo-name"><span class="career">Career</span><span class="nest">Nest</span></span>
-            </div>
-            <p>Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
-            <div class="social-links">
-              <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
-              <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
-              <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-            </div>
+        <span class="hero-tag">Về CareerNest</span>
+        <h1 class="hero-title" style="font-size: 4rem; margin-bottom: 24px;">Kiến Tạo Tương Lai <br><span
+            style="color: var(--color-brand-orange);">Cho Thế Hệ Trẻ</span></h1>
+        <p class="hero-desc" style="max-width: 800px; margin: 0 auto; font-size: 1.2rem; opacity: 0.9;">Chúng tôi không
+          chỉ cung cấp thông tin, chúng tôi xây dựng lộ trình để mỗi bạn trẻ Việt Nam tự tin bước vào thế giới nghề
+          nghiệp đầy biến động.</p>
+      </div>
+    </section>
+
+    <section class="about-content">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+              alt="Team Collaboration" referrerPolicy="no-referrer">
           </div>
           <div>
-            <h4 class="footer-title">Khám Phá</h4>
-            <ul class="footer-links">
-              <li><a href="aboutus.html">Về CareerNest</a></li>
-              <li><a href="TracNghiem.html">Bài trắc nghiệm</a></li>
-              <li><a href="Nganhhoc.html">Ngành học</a></li>
-              <li><a href="Blogs.html">Blogs</a></li>
-              <li><a href="Admin.html">Quản trị</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="footer-title">Liên Hệ</h4>
-            <ul class="footer-links">
-              <li class="flex items-center gap-3"><i data-lucide="map-pin" style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
-              <li class="flex items-center gap-3"><i data-lucide="phone" style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
-              <li class="flex items-center gap-3"><i data-lucide="mail" style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
-            </ul>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 24px;">Sứ Mệnh Của Chúng Tôi</h2>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; color: var(--color-slate-600);">
+              CareerNest ra đời từ khát vọng giải quyết bài toán "khủng hoảng chọn ngành" của học sinh Việt Nam. Chúng
+              tôi tin rằng, khi một cá nhân được đặt đúng vị trí, họ không chỉ thành công mà còn đóng góp tối đa cho xã
+              hội.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; color: var(--color-slate-600);">Với sự
+              kết hợp giữa các học thuyết tâm lý học kinh điển (Holland, MBTI) và công nghệ phân tích dữ liệu hiện đại,
+              CareerNest mang đến cái nhìn toàn diện và khách quan nhất về tiềm năng của mỗi người.</p>
+
+            <div class="mission-card">
+              <div class="flex items-center gap-4" style="margin-bottom: 15px;">
+                <div
+                  style="width: 40px; height: 40px; background: var(--color-brand-light-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-brand-orange);">
+                  <i data-lucide="target" style="width: 20px;"></i>
+                </div>
+                <h3 style="color: var(--color-brand-blue); margin: 0;">Tầm Nhìn 2030</h3>
+              </div>
+              <p style="font-style: italic; color: var(--color-slate-700);">"Trở thành nền tảng hướng nghiệp số 1 Đông
+                Nam Á, đồng hành cùng 10 triệu thanh niên trên hành trình định vị bản thân và phát triển sự nghiệp bền
+                vững."</p>
+            </div>
           </div>
         </div>
-        <div style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
-          <p>© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-number">50,000+</div>
+            <div class="stat-label">Người dùng tin tưởng</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">120+</div>
+            <div class="stat-label">Đối tác giáo dục</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">Tỷ lệ hài lòng</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Giải thưởng uy tín</div>
+          </div>
         </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Giá Trị Cốt Lõi</h2>
+          <p class="section-desc">Nền tảng vững chắc giúp chúng tôi xây dựng niềm tin với cộng đồng.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-8">
+          <div class="value-card">
+            <div class="value-icon"><i data-lucide="shield-check"></i></div>
+            <h3 style="margin-bottom: 12px;">Chính Trực</h3>
+            <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Chúng tôi cam kết cung cấp dữ
+              liệu trung thực, khách quan và bảo mật tuyệt đối thông tin người dùng.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i data-lucide="users"></i></div>
+            <h3 style="margin-bottom: 12px;">Đồng Hành</h3>
+            <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Không chỉ là công cụ, chúng tôi
+              là người bạn lắng nghe và thấu hiểu mọi trăn trở của bạn.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i data-lucide="trending-up"></i></div>
+            <h3 style="margin-bottom: 12px;">Đột Phá</h3>
+            <p style="font-size: 15px; color: var(--color-slate-600); line-height: 1.6;">Luôn tiên phong ứng dụng AI và
+              Big Data để mang lại những giải pháp hướng nghiệp tối ưu nhất.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Đội Ngũ Chuyên Gia</h2>
+          <p class="section-desc">Sự kết hợp giữa kinh nghiệm giáo dục và tư duy công nghệ đột phá.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400"
+                class="team-img" alt="Founder" referrerPolicy="no-referrer">
+              <div class="team-socials">
+                <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
+                <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
+              </div>
+            </div>
+            <h3 class="team-name">TS. Lê Hoàng Nam</h3>
+            <p class="team-role">CEO & Founder</p>
+          </div>
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400"
+                class="team-img" alt="Psychologist" referrerPolicy="no-referrer">
+              <div class="team-socials">
+                <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
+                <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
+              </div>
+            </div>
+            <h3 class="team-name">ThS. Nguyễn Mai Anh</h3>
+            <p class="team-role">Chuyên gia Tâm lý</p>
+          </div>
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+                class="team-img" alt="CTO" referrerPolicy="no-referrer">
+              <div class="team-socials">
+                <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
+                <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
+              </div>
+            </div>
+            <h3 class="team-name">Trần Minh Đức</h3>
+            <p class="team-role">Giám đốc Công nghệ</p>
+          </div>
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400"
+                class="team-img" alt="Content Director" referrerPolicy="no-referrer">
+              <div class="team-socials">
+                <a href="#"><i data-lucide="linkedin" style="width: 18px;"></i></a>
+                <a href="#"><i data-lucide="mail" style="width: 18px;"></i></a>
+              </div>
+            </div>
+            <h3 class="team-name">Phạm Quỳnh Chi</h3>
+            <p class="team-role">Giám đốc Nội dung</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section
+      style="padding: 60px 0; background: var(--color-slate-50); border-top: 1px solid var(--color-slate-100); border-bottom: 1px solid var(--color-slate-100);">
+      <div class="container">
+        <p
+          style="text-align: center; color: var(--color-slate-400); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px;">
+          Đối tác chiến lược</p>
+        <div
+          class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Partner"
+            style="height: 30px;" referrerPolicy="no-referrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="Partner"
+            style="height: 30px;" referrerPolicy="no-referrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Partner"
+            style="height: 30px;" referrerPolicy="no-referrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Partner"
+            style="height: 30px;" referrerPolicy="no-referrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Partner"
+            style="height: 25px;" referrerPolicy="no-referrer">
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="about-content">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Hành Trình Phát Triển</h2>
+          <p class="section-desc">Những cột mốc khẳng định sự trưởng thành và uy tín của CareerNest.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2022</div>
+            <h4 style="margin-bottom: 8px;">Khởi đầu tâm huyết</h4>
+            <p style="color: var(--color-slate-600);">CareerNest được thành lập bởi nhóm chuyên gia giáo dục và công
+              nghệ với mong muốn thay đổi cách hướng nghiệp truyền thống.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2023</div>
+            <h4 style="margin-bottom: 8px;">Bứt phá công nghệ</h4>
+            <p style="color: var(--color-slate-600);">Ra mắt hệ thống trắc nghiệm AI thế hệ mới, thu hút hơn 20,000 lượt
+              sử dụng trong 6 tháng đầu tiên.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024</div>
+            <h4 style="margin-bottom: 8px;">Mở rộng quy mô</h4>
+            <p style="color: var(--color-slate-600);">Hợp tác với 100+ trường THPT và Đại học, trở thành đối tác tin cậy
+              của các tổ chức giáo dục quốc tế.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 100px 0; background: var(--color-brand-blue); color: white; text-align: center;">
+      <div class="container">
+        <h2 style="font-size: 2.5rem; margin-bottom: 24px;">Sẵn sàng khám phá tiềm năng của bạn?</h2>
+        <p style="max-width: 600px; margin: 0 auto 40px; opacity: 0.8;">Hãy để CareerNest đồng hành cùng bạn trên con
+          đường chinh phục ước mơ nghề nghiệp.</p>
+        <div class="flex justify-center gap-4">
+          <a href="TracNghiem.html" class="btn btn-orange" style="padding: 16px 32px; font-size: 1.1rem;">Làm trắc
+            nghiệm ngay</a>
+          <a href="Nganhhoc.html" class="btn"
+            style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 16px 32px; font-size: 1.1rem;">Tìm
+            hiểu ngành học</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
+            <span class="footer-logo-name"><span class="career">Career</span><span class="nest">Nest</span></span>
+          </div>
+          <p>Hệ thống định hướng nghề nghiệp hàng đầu, giúp thế hệ trẻ khám phá bản thân.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+            <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+            <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Khám Phá</h4>
+          <ul class="footer-links">
+            <li><a href="aboutus.html">Về CareerNest</a></li>
+            <li><a href="TracNghiem.html">Bài trắc nghiệm</a></li>
+            <li><a href="Nganhhoc.html">Ngành học</a></li>
+            <li><a href="Blogs.html">Blogs</a></li>
+            <li><a href="Admin.html">Quản trị</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Liên Hệ</h4>
+          <ul class="footer-links">
+            <li class="flex items-center gap-3"><i data-lucide="map-pin"
+                style="color: var(--color-brand-orange); width: 18px;"></i> 123 Đường Career, TP. HCM</li>
+            <li class="flex items-center gap-3"><i data-lucide="phone"
+                style="color: var(--color-brand-orange); width: 18px;"></i> +84 (028) 1234 5678</li>
+            <li class="flex items-center gap-3"><i data-lucide="mail"
+                style="color: var(--color-brand-orange); width: 18px;"></i> contact@careernest.vn</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        style="text-align: center; font-size: 12px; border-top: 1px solid var(--color-slate-800); padding-top: 30px;">
+        <p>© 2024 CareerNest. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
 
 
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script type="module" src="assets/js/language.js"></script>
-    <script type="module" src="assets/js/ai-assistant.js"></script>
-    <script>
-      lucide.createIcons();
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" src="assets/js/language.js"></script>
+  <script type="module" src="assets/js/ai-assistant.js"></script>
+  <script>
+    lucide.createIcons();
 
 
-    </script>
-  </body>
+  </script>
+  </script>
+  <script src="assets/js/auth.js"></script>
+
+  <script>
+    renderAuth();
+  </script>
+</body>
+
 </html>
