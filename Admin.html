@@ -87,7 +87,7 @@
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-2" style="color: var(--admin-text-muted); font-size: 14px;">
           <i data-lucide="calendar" style="width: 16px;"></i>
-          <span>Thứ Sáu, 07/03/2026</span>
+          <span id="current-time"></span>
         </div>
         <div style="width: 1px; height: 24px; background: var(--admin-border);"></div>
 
@@ -574,7 +574,29 @@
             document.querySelector('[data-section="settings"]').style.display = 'none';
           }
         });
+
+        function updateTime() {
+          const now = new Date();
+
+          const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+          const day = days[now.getDay()];
+
+          const date = now.toLocaleDateString('vi-VN');
+
+          const time = now.toLocaleTimeString('vi-VN');
+
+          document.getElementById("current-time").innerText =
+            `${day}, ${date} - ${time}`;
+        }
+
+        // chạy lần đầu
+        updateTime();
+
+        // cập nhật mỗi giây
+        setInterval(updateTime, 1000);
       </script>
+
+
 
 </body>
 
