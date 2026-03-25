@@ -20,6 +20,7 @@
     if (!user || (user.role !== "Admin" && user.role !== "Employer")) {
       window.location.replace("index.html");
     }
+
   </script>
 </head>
 
@@ -208,6 +209,7 @@
       </section>
 
       <!-- Users Management -->
+      <!-- style="display:block; -->
       <section id="section-users" class="admin-section">
         <div class="admin-card">
           <div class="card-header">
@@ -218,7 +220,7 @@
                   style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-users">
               </div>
             </div>
-            <button class="btn btn-primary" onclick="openModal('user')"><i data-lucide="user-plus"></i> Thêm người
+            <button class="btn btn-primary" onclick="openModal()"><i data-lucide="user-plus"></i> Thêm người
               dùng</button>
           </div>
           <div class="admin-table-container">
@@ -233,13 +235,12 @@
                   <th>Thao tác</th>
                 </tr>
               </thead>
-              <tbody>
-                <!-- Data will be rendered here -->
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
       </section>
+
 
       <!-- Majors Management -->
       <section id="section-majors" class="admin-section">
@@ -375,477 +376,206 @@
     </div>
   </main>
 
-  <!-- Modals -->
-  <div class="modal-overlay" id="admin-modal">
+  <!-- Modal -->
+  <div id="modal" class="modal-overlay" style="display: none;  ">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 id="modal-title">Thêm mới</h3>
-        <button class="close-modal" onclick="closeModal()"><i data-lucide="x"></i></button>
+        <h3 id="modal-title"></h3>
+        <button class="close-modal" onclick="closeModal()"> <i data-lucide="x"></i></button>
       </div>
       <div class="modal-body">
-        <form id="admin-form">
-          <!-- Form fields will be injected here -->
+        <form id="form">
+          <div class="form-group">
+            <label>Họ và tên</label>
+            <input type="text" name="FullName" placeholder="Họ và tên" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="Email" placeholder="Email" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label>Mật khẩu</label>
+            <input type="password" name="Password" placeholder="Mật khẩu" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Vai trò</label>
+            <select name="Role" class="form-control">
+              <option value="Student">Học Sinh</option>
+              <option value="Employer">Nhà tuyển dụng</option>
+              <option value="Admin">Quản trị viên</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-primary">Lưu</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Hủy</button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button class="btn-secondary" onclick="closeModal()">Hủy</button>
-        <button class="btn-primary" id="save-btn" style="min-width: 100px;">Lưu thay đổi</button>
-      </div>
-    </div>
-  </div>
 
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
+      <script>
+        if (user) {
+          // Hiển thị tên
+          document.getElementById("adminName").innerText = user.name;
 
-    // Data Management with LocalStorage
-    const STORAGE_KEYS = {
-      USERS: 'cn_users',
-      MAJORS: 'cn_majors',
-      QUIZZES: 'cn_quizzes',
-      BLOGS: 'cn_blogs',
-      SETTINGS: 'cn_settings'
-    };
 
-    // Initial Data
-    const initialData = {
-      [STORAGE_KEYS.USERS]: [
-        { id: 1, name: 'Nguyễn Văn An', email: 'an.nv@gmail.com', role: 'Học sinh', date: '01/03/2026', status: 'Hoạt động' },
-        { id: 2, name: 'Admin User', email: 'admin@careernest.com', role: 'Quản trị viên', date: '01/01/2026', status: 'Hoạt động' }
-      ],
-      [STORAGE_KEYS.MAJORS]: [
-        { id: 1, code: 'IT01', name: 'Công nghệ thông tin', group: 'Kỹ thuật', views: '1,250' },
-        { id: 2, code: 'KT01', name: 'Kinh tế quốc tế', group: 'Kinh tế', views: '980' }
-      ],
-      [STORAGE_KEYS.QUIZZES]: [
-        { id: 1, name: 'Trắc nghiệm Holland', questions: 60, difficulty: 'Trung bình', attempts: '5,400' },
-        { id: 2, name: 'Trắc nghiệm MBTI', questions: 70, difficulty: 'Dễ', attempts: '3,200' }
-      ],
-      [STORAGE_KEYS.BLOGS]: [
-        { id: 1, title: 'Xu hướng ngành IT 2026', author: 'Admin', date: '05/03/2026', status: 'Đã đăng' }
-      ]
-    };
+          let roleText = "";
+          if (user.role === "Admin") roleText = "Quản trị viên";
+          else if (user.role === "Employer") roleText = "Nhà tuyển dụng";
+          else roleText = "Người dùng";
 
-    // Initialize LocalStorage if empty
-    Object.keys(initialData).forEach(key => {
-      if (!localStorage.getItem(key)) {
-        localStorage.setItem(key, JSON.stringify(initialData[key]));
-      }
-    });
+          document.getElementById("adminRole").innerText = roleText;
 
-    // State
-    let currentType = '';
-    let editingId = null;
+          // Avatar random theo email (không bị trùng)
+          document.getElementById("adminAvatar").src =
+            "https://i.pravatar.cc/150?u=" + user.email;
+        }
+      </script>
+      <script>
+        function goHome(e) {
+          e.preventDefault();
 
-    // Render Functions
-    function renderUsers(filter = '') {
-      const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS));
-      const tbody = document.querySelector('#table-users tbody');
-      tbody.innerHTML = users
-        .filter(u => u.name.toLowerCase().includes(filter.toLowerCase()) || u.email.toLowerCase().includes(filter.toLowerCase()))
-        .map(u => `
-            <tr>
-              <td>${u.name}</td>
-              <td>${u.email}</td>
-              <td>${u.role}</td>
-              <td>${u.date}</td>
-              <td><span class="status-badge status-active">${u.status}</span></td>
-              <td>
-                <button class="action-btn" title="Xem" onclick="viewItem('user', ${u.id})"><i data-lucide="eye" style="width:14px"></i></button>
-                <button class="action-btn" title="Sửa" onclick="editItem('user', ${u.id})"><i data-lucide="edit-2" style="width:14px"></i></button>
-                <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteItem('user', ${u.id})"><i data-lucide="trash-2" style="width:14px"></i></button>
-              </td>
-            </tr>
-          `).join('');
-      lucide.createIcons();
-      updateStats();
-    }
+          localStorage.removeItem("user");
 
-    function renderMajors(filter = '') {
-      const majors = JSON.parse(localStorage.getItem(STORAGE_KEYS.MAJORS));
-      const tbody = document.querySelector('#table-majors tbody');
-      tbody.innerHTML = majors
-        .filter(m => m.name.toLowerCase().includes(filter.toLowerCase()) || m.code.toLowerCase().includes(filter.toLowerCase()))
-        .map(m => `
-            <tr>
-              <td>${m.code}</td>
-              <td>${m.name}</td>
-              <td>${m.group}</td>
-              <td>${m.views}</td>
-              <td>
-                <button class="action-btn" title="Xem" onclick="viewItem('major', ${m.id})"><i data-lucide="eye" style="width:14px"></i></button>
-                <button class="action-btn" title="Sửa" onclick="editItem('major', ${m.id})"><i data-lucide="edit-2" style="width:14px"></i></button>
-                <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteItem('major', ${m.id})"><i data-lucide="trash-2" style="width:14px"></i></button>
-              </td>
-            </tr>
-          `).join('');
-      lucide.createIcons();
-      updateStats();
-    }
+          window.location.replace("index.html");
+        }
+      </script>
 
-    function renderQuizzes(filter = '') {
-      const quizzes = JSON.parse(localStorage.getItem(STORAGE_KEYS.QUIZZES));
-      const tbody = document.querySelector('#table-quizzes tbody');
-      tbody.innerHTML = quizzes
-        .filter(q => q.name.toLowerCase().includes(filter.toLowerCase()))
-        .map(q => `
-            <tr>
-              <td>${q.name}</td>
-              <td>${q.questions}</td>
-              <td>${q.difficulty}</td>
-              <td>${q.attempts}</td>
-              <td>
-                <button class="action-btn" title="Xem" onclick="viewItem('quiz', ${q.id})"><i data-lucide="eye" style="width:14px"></i></button>
-                <button class="action-btn" title="Sửa" onclick="editItem('quiz', ${q.id})"><i data-lucide="edit-2" style="width:14px"></i></button>
-                <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteItem('quiz', ${q.id})"><i data-lucide="trash-2" style="width:14px"></i></button>
-              </td>
-            </tr>
-          `).join('');
-      lucide.createIcons();
-      updateStats();
-    }
+      <script>
+        let editingId = null;
+        const form = document.getElementById('form');
 
-    function renderBlogs(filter = '') {
-      const blogs = JSON.parse(localStorage.getItem(STORAGE_KEYS.BLOGS));
-      const tbody = document.querySelector('#table-blogs tbody');
-      tbody.innerHTML = blogs
-        .filter(b => b.title.toLowerCase().includes(filter.toLowerCase()))
-        .map(b => `
-            <tr>
-              <td>${b.title}</td>
-              <td>${b.author}</td>
-              <td>${b.date}</td>
-              <td><span class="status-badge status-active">${b.status}</span></td>
-              <td>
-                <button class="action-btn" title="Xem" onclick="viewItem('blog', ${b.id})"><i data-lucide="eye" style="width:14px"></i></button>
-                <button class="action-btn" title="Sửa" onclick="editItem('blog', ${b.id})"><i data-lucide="edit-2" style="width:14px"></i></button>
-                <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteItem('blog', ${b.id})"><i data-lucide="trash-2" style="width:14px"></i></button>
-              </td>
-            </tr>
-          `).join('');
-      lucide.createIcons();
-      updateStats();
-    }
+        // OPEN MODAL
+        function openModal(data = null) {
+          document.getElementById('modal').style.display = 'flex';
+          document.getElementById('modal-title').innerText = data ? 'Sửa user' : 'Thêm user';
 
-    function renderActivity() {
-      const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS));
-      const tbody = document.querySelector('#table-activity tbody');
-
-      // Simulate some activities based on users
-      const activities = [
-        'Hoàn thành trắc nghiệm Holland',
-        'Đăng ký tài khoản mới',
-        'Xem thông tin ngành CNTT',
-        'Đọc bài viết mới',
-        'Cập nhật hồ sơ cá nhân'
-      ];
-
-      tbody.innerHTML = users.slice(0, 5).map((u, index) => `
-          <tr>
-            <td>
-              <div class="flex items-center gap-3">
-                <img src="https://i.pravatar.cc/150?u=${u.id}" style="width: 32px; height: 32px; border-radius: 50%;" referrerPolicy="no-referrer">
-                <div>
-                  <p style="margin: 0; font-weight: 600;">${u.name}</p>
-                  <p style="margin: 0; font-size: 12px; color: var(--admin-text-muted);">${u.email}</p>
-                </div>
-              </div>
-            </td>
-            <td>${activities[index % activities.length]}</td>
-            <td>${index + 1 * 2} phút trước</td>
-            <td><span class="status-badge status-active">Thành công</span></td>
-            <td>
-              <button class="action-btn" title="Xem chi tiết" onclick="viewItem('user', ${u.id})"><i data-lucide="eye" style="width: 14px;"></i></button>
-              <button class="action-btn" title="Chỉnh sửa" onclick="editItem('user', ${u.id})"><i data-lucide="edit" style="width: 14px;"></i></button>
-            </td>
-          </tr>
-        `).join('');
-      lucide.createIcons();
-    }
-
-    function updateStats() {
-      const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)).length;
-      const majors = JSON.parse(localStorage.getItem(STORAGE_KEYS.MAJORS)).length;
-      const quizzes = JSON.parse(localStorage.getItem(STORAGE_KEYS.QUIZZES)).length;
-
-      const statCards = document.querySelectorAll('.stat-info p');
-      if (statCards.length >= 3) {
-        statCards[0].textContent = users.toLocaleString();
-        statCards[2].textContent = majors.toLocaleString();
-      }
-    }
-
-    // Modal Logic
-    function openModal(type, data = null, isReadOnly = false) {
-      currentType = type;
-      editingId = data ? data.id : null;
-      const modal = document.getElementById('admin-modal');
-      const title = document.getElementById('modal-title');
-      const form = document.getElementById('admin-form');
-      const saveBtn = document.getElementById('save-btn');
-
-      modal.classList.add('active');
-
-      if (isReadOnly) {
-        title.textContent = `Chi tiết ${type}`;
-        saveBtn.style.display = 'none';
-      } else {
-        title.textContent = editingId ? `Chỉnh sửa ${type}` : `Thêm ${type} mới`;
-        saveBtn.style.display = 'block';
-      }
-
-      const disabled = isReadOnly ? 'disabled' : '';
-
-      let fields = '';
-      if (type === 'user') {
-        fields = `
-            <div class="form-group"><label>Họ tên</label><input type="text" name="name" value="${data?.name || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Email</label><input type="email" name="email" value="${data?.email || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Vai trò</label><select name="role" class="form-control" ${disabled}><option ${data?.role === 'Học sinh' ? 'selected' : ''}>Học sinh</option><option ${data?.role === 'Quản trị viên' ? 'selected' : ''}>Quản trị viên</option></select></div>
-          `;
-      } else if (type === 'major') {
-        fields = `
-            <div class="form-group"><label>Mã ngành</label><input type="text" name="code" value="${data?.code || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Tên ngành</label><input type="text" name="name" value="${data?.name || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Khối ngành</label><input type="text" name="group" value="${data?.group || ''}" class="form-control" required ${disabled}></div>
-          `;
-      } else if (type === 'quiz') {
-        fields = `
-            <div class="form-group"><label>Tên bài</label><input type="text" name="name" value="${data?.name || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Số câu hỏi</label><input type="number" name="questions" value="${data?.questions || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Độ khó</label><select name="difficulty" class="form-control" ${disabled}><option ${data?.difficulty === 'Dễ' ? 'selected' : ''}>Dễ</option><option ${data?.difficulty === 'Trung bình' ? 'selected' : ''}>Trung bình</option><option ${data?.difficulty === 'Khó' ? 'selected' : ''}>Khó</option></select></div>
-          `;
-      } else if (type === 'blog') {
-        fields = `
-            <div class="form-group"><label>Tiêu đề</label><input type="text" name="title" value="${data?.title || ''}" class="form-control" required ${disabled}></div>
-            <div class="form-group"><label>Tác giả</label><input type="text" name="author" value="${data?.author || 'Admin'}" class="form-control" required ${disabled}></div>
-          `;
-      } else if (type === 'notification') {
-        title.textContent = 'Gửi thông báo hệ thống';
-        saveBtn.textContent = 'Gửi ngay';
-        fields = `
-            <div class="form-group"><label>Tiêu đề thông báo</label><input type="text" name="notif_title" class="form-control" placeholder="Nhập tiêu đề..." required></div>
-            <div class="form-group"><label>Nội dung</label><textarea id="notif_content" name="notif_content" class="form-control" rows="4" placeholder="Nhập nội dung thông báo cho tất cả người dùng..." required></textarea></div>
-            <div class="form-group"><label>Loại thông báo</label><select name="notif_type" class="form-control"><option>Thông tin</option><option>Khuyến mãi</option><option>Cảnh báo</option></select></div>
-          `;
-      } else if (type === 'export') {
-        title.textContent = 'Xuất báo cáo hệ thống';
-        saveBtn.textContent = 'Tải xuống';
-        fields = `
-            <div class="form-group"><label>Loại dữ liệu</label><select name="export_type" class="form-control"><option>Tất cả dữ liệu</option><option>Người dùng</option><option>Ngành học</option><option>Kết quả trắc nghiệm</option></select></div>
-            <div class="form-group"><label>Định dạng</label><select name="export_format" class="form-control"><option>Excel (.xlsx)</option><option>CSV (.csv)</option><option>PDF (.pdf)</option></select></div>
-            <div class="form-group"><label>Khoảng thời gian</label><select name="export_range" class="form-control"><option>Tất cả thời gian</option><option>Tháng này</option><option>Tuần này</option></select></div>
-          `;
-      }
-
-      form.innerHTML = fields;
-    }
-
-    function closeModal() {
-      document.getElementById('admin-modal').classList.remove('active');
-    }
-
-    function saveItem() {
-      const form = document.getElementById('admin-form');
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      const formData = new FormData(form);
-      const itemData = Object.fromEntries(formData.entries());
-
-      if (currentType === 'notification') {
-        alert('Thông báo đã được gửi thành công tới toàn bộ người dùng!');
-        closeModal();
-        return;
-      }
-
-      if (currentType === 'export') {
-        alert(`Đang khởi tạo tệp ${itemData.export_format}... Báo cáo sẽ được tải xuống tự động.`);
-        closeModal();
-        return;
-      }
-
-      const key = STORAGE_KEYS[currentType.toUpperCase() + 'S'];
-      let items = JSON.parse(localStorage.getItem(key));
-
-      if (editingId) {
-        items = items.map(item => item.id === editingId ? { ...item, ...itemData } : item);
-      } else {
-        itemData.id = Date.now();
-        itemData.date = new Date().toLocaleDateString('vi-VN');
-        if (currentType === 'user') itemData.status = 'Hoạt động';
-        if (currentType === 'blog') itemData.status = 'Đã đăng';
-        if (currentType === 'major') itemData.views = '0';
-        if (currentType === 'quiz') itemData.attempts = '0';
-        items.push(itemData);
-      }
-
-      localStorage.setItem(key, JSON.stringify(items));
-      closeModal();
-      refreshAll();
-    }
-
-    function deleteItem(type, id) {
-      if (confirm('Bạn có chắc chắn muốn xóa mục này?')) {
-        const key = STORAGE_KEYS[type.toUpperCase() + 'S'];
-        let items = JSON.parse(localStorage.getItem(key));
-        items = items.filter(item => item.id !== id);
-        localStorage.setItem(key, JSON.stringify(items));
-        refreshAll();
-      }
-    }
-
-    function editItem(type, id) {
-      const key = STORAGE_KEYS[type.toUpperCase() + 'S'];
-      const items = JSON.parse(localStorage.getItem(key));
-      const item = items.find(i => i.id === id);
-      openModal(type, item, false);
-    }
-
-    function viewItem(type, id) {
-      const key = STORAGE_KEYS[type.toUpperCase() + 'S'];
-      const items = JSON.parse(localStorage.getItem(key));
-      const item = items.find(i => i.id === id);
-      openModal(type, item, true);
-    }
-
-    function refreshAll() {
-      renderUsers();
-      renderMajors();
-      renderQuizzes();
-      renderBlogs();
-      renderActivity();
-      loadSettings();
-    }
-
-    function switchSection(sectionName) {
-      const targetItem = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
-      if (targetItem) targetItem.click();
-    }
-
-    function exportReport() {
-      openModal('export');
-    }
-
-    function sendNotification() {
-      openModal('notification');
-    }
-
-    function loadSettings() {
-      const settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {
-        siteName: 'CareerNest',
-        email: 'contact@careernest.com',
-        maintenance: false,
-        description: 'Nền tảng định hướng nghề nghiệp thông minh cho học sinh sinh viên.'
-      };
-
-      const form = document.getElementById('settings-form');
-      form.querySelector('input[type="text"]').value = settings.siteName;
-      form.querySelector('input[type="email"]').value = settings.email;
-      form.querySelector('input[type="checkbox"]').checked = settings.maintenance;
-      form.querySelector('textarea').value = settings.description;
-    }
-
-    // Event Listeners
-    document.getElementById('save-btn').addEventListener('click', saveItem);
-
-    document.getElementById('search-users').addEventListener('input', (e) => renderUsers(e.target.value));
-    document.getElementById('search-majors').addEventListener('input', (e) => renderMajors(e.target.value));
-    document.getElementById('search-quizzes').addEventListener('input', (e) => renderQuizzes(e.target.value));
-    document.getElementById('search-blogs').addEventListener('input', (e) => renderBlogs(e.target.value));
-
-    document.getElementById('settings-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const settings = {
-        siteName: form.querySelector('input[type="text"]').value,
-        email: form.querySelector('input[type="email"]').value,
-        maintenance: form.querySelector('input[type="checkbox"]').checked,
-        description: form.querySelector('textarea').value
-      };
-      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
-      alert('Cài đặt hệ thống đã được lưu thành công!');
-    });
-
-    // Initial Render
-    refreshAll();
-
-    // Section switching logic
-    const navItems = document.querySelectorAll('.nav-item[data-section]');
-    const sections = document.querySelectorAll('.admin-section');
-    const headerTitle = document.querySelector('.admin-header h2');
-
-    navItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetSection = item.getAttribute('data-section');
-
-        // Update active nav item
-        navItems.forEach(nav => nav.classList.remove('active'));
-        item.classList.add('active');
-
-        // Update visible section
-        sections.forEach(section => {
-          section.classList.remove('active');
-          if (section.id === `section-${targetSection}`) {
-            section.classList.add('active');
+          if (data) {
+            editingId = data.UserID;
+            form.FullName.value = data.FullName;
+            form.Email.value = data.Email;
+            form.Role.value = data.Role;
+          } else {
+            editingId = null;
+            form.reset();
           }
+        }
+
+        //  CLOSE MODAL
+        function closeModal() {
+          document.getElementById('modal').style.display = 'none';
+        }
+
+        async function loadUsers() {
+          const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php');
+          const users = await res.json();
+
+          const tbody = document.querySelector('#table-users tbody');
+
+          tbody.innerHTML = users.map(u => `
+  <tr>
+    <td>${u.FullName}</td>
+    <td>${u.Email}</td>
+    <td>${u.Role}</td>
+    <td>${u.CreatedAt}</td>
+    <td><span class="status-badge status-active">Hoạt động</span></td>
+    <td>
+      <button class="action-btn" title="Xem" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="eye" style="width:14px"></i></button>
+      <button class="action-btn" title="Sửa" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="edit-2" style="width:14px"></i></button>
+      <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteUser(${u.UserID})"><i data-lucide="trash-2" style="width:14px"></i></button>
+    </td>
+  </tr>
+`).join('');
+
+          lucide.createIcons();
+        }
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+
+          if (editingId) {
+            data.UserID = editingId;
+
+            await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+
+          } else {
+            await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+          }
+
+          closeModal();
+          loadUsers();
         });
 
-        // Update header title
-        headerTitle.textContent = item.textContent.trim();
+        async function deleteUser(id) {
+          if (!confirm('Xóa thật?')) return;
 
-        // Close sidebar on mobile after selection
-        if (window.innerWidth <= 640) {
-          document.querySelector('.admin-sidebar').style.display = 'none';
+          await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+            method: 'DELETE',
+            body: `UserID=${id}`
+          });
+
+          loadUsers();
         }
-      });
-    });
 
-    // Mobile menu toggle
-    const menuBtn = document.querySelector('.hidden-desktop');
-    const sidebar = document.querySelector('.admin-sidebar');
+        window.onload = function () {
+          loadUsers();
+        }
+      </script>
 
-    menuBtn.addEventListener('click', () => {
-      if (sidebar.style.display === 'flex') {
-        sidebar.style.display = 'none';
-      } else {
-        sidebar.style.display = 'flex';
-        sidebar.style.position = 'fixed';
-        sidebar.style.width = '100%';
-        sidebar.style.height = '100vh';
-      }
-    });
-  </script>
-  <script>
-    if (user) {
-      // Hiển thị tên
-      document.getElementById("adminName").innerText = user.name;
+      <script src="https://unpkg.com/lucide@latest"></script>
 
+      <script>
+        // Chuyển section khi click menu
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', function (e) {
+            e.preventDefault();
 
-      let roleText = "";
-      if (user.role === "Admin") roleText = "Quản trị viên";
-      else if (user.role === "Employer") roleText = "Nhà tuyển dụng";
-      else roleText = "Người dùng";
+            const section = this.getAttribute('data-section');
+            if (!section) return;
 
-      document.getElementById("adminRole").innerText = roleText;
+            // Ẩn tất cả section
+            document.querySelectorAll('.admin-section').forEach(sec => {
+              sec.classList.remove('active');
+              sec.style.display = 'none';
+            });
 
-      // Avatar random theo email (không bị trùng)
-      document.getElementById("adminAvatar").src =
-        "https://i.pravatar.cc/150?u=" + user.email;
-    }
-  </script>
-  <script>
-    function goHome(e) {
-      e.preventDefault();
+            // Hiện section được chọn
+            const target = document.getElementById('section-' + section);
+            if (target) {
+              target.classList.add('active');
+              target.style.display = 'block';
+            }
 
-      localStorage.removeItem("user");
+            // Active menu
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
 
-      window.location.replace("index.html");
-    }
-  </script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const user = JSON.parse(localStorage.getItem("user"));
+
+          if (user.role === "Employer") {
+            document.querySelector('[data-section="users"]').style.display = 'none';
+            document.querySelector('[data-section="majors"]').style.display = 'none';
+            document.querySelector('[data-section="settings"]').style.display = 'none';
+          }
+        });
+      </script>
+
 </body>
 
 </html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Users</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/Admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+<h2>Quản lý người dùng</h2>
+
+
+<section id="section-users" class="admin-section" style="display:block;">
+        <div class="admin-card">
+          <div class="card-header">
+            <div class="flex items-center gap-4">
+              <h3 class="card-title">Quản lý người dùng</h3>
+              <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm người dùng..." class="form-control"
+                  style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-users">
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="openModal()"><i data-lucide="user-plus"></i> Thêm người dùng</button>
+          </div>
+          <div class="admin-table-container">
+            <table class="admin-table" id="table-users">
+              <thead>
+                <tr>
+                  <th>Họ tên</th>
+                  <th>Email</th>
+                  <th>Vai trò</th>
+                  <th>Ngày tham gia</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+
+<!-- Modal -->
+<div id="modal" style="display:none; border:1px solid #000; padding:10px; margin-top:20px;">
+  <h3 id="modal-title"></h3>
+
+  <form id="form">
+     <div class="form-group">
+      <label>Họ và tên</label>
+      <input type="text" name="FullName" placeholder="Họ và tên" class="form-control" required >
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="Email" placeholder="Email" class="form-control" required >
+    </div>
+
+    <div class="form-group">
+      <label>Mật khẩu</label>
+      <input type="password" name="Password" placeholder="Mật khẩu" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Vai trò</label>
+      <select name="Role" class="form-control">
+        <option value="Student" >Student</option>
+        <option value="Employer">Employer</option>
+        <option value="Admin" >Admin</option>
+      </select>
+    </div>
+
+    <button type="submit">Lưu</button>
+    <button type="button" onclick="closeModal()">Hủy</button>
+  </form>
+</div>
+
+<script>
+let editingId = null;
+const form = document.getElementById('form');
+
+// 🟢 OPEN MODAL
+function openModal(data = null){
+  document.getElementById('modal').style.display = 'block';
+  document.getElementById('modal-title').innerText = data ? 'Sửa user' : 'Thêm user';
+
+  if(data){
+    editingId = data.UserID;
+    form.FullName.value = data.FullName;
+    form.Email.value = data.Email;
+    form.Role.value = data.Role;
+  } else {
+    editingId = null;
+    form.reset();
+  }
+}
+
+// 🔴 CLOSE MODAL
+function closeModal(){
+  document.getElementById('modal').style.display = 'none';
+}
+
+// 📥 LOAD USERS
+async function loadUsers(){
+  const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php');
+  const users = await res.json();
+
+  const tbody = document.querySelector('#table-users tbody');
+
+  tbody.innerHTML = users.map(u => `
+     <tr>
+              <td>${u.FullName}</td>
+              <td>${u.Email}</td>
+              <td>${u.Role}</td>
+              <td>${u.CreatedAt}</td>
+              <td><span class="status-badge status-active">Hoạt động</span></td>
+              <td>
+                <button class="action-btn" title="Xem" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="eye" style="width:14px"></i></button>
+                <button class="action-btn" title="Sửa" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="edit-2" style="width:14px"></i></button>
+                <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteUser(${u.UserID})""><i data-lucide="trash-2" style="width:14px"></i></button>
+              </td>
+            </tr>
+  `).join('');
+}
+
+// 💾 SAVE
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  if(editingId){
+    data.UserID = editingId;
+
+    await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+  } else {
+    await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  }
+
+  closeModal();
+  loadUsers();
+});
+
+// ❌ DELETE
+async function deleteUser(id){
+  if(!confirm('Xóa thật?')) return;
+
+  await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
+    method: 'DELETE',
+    body: `UserID=${id}`
+  });
+
+  loadUsers();
+}
+
+// 🚀 INIT
+window.onload = function(){
+  loadUsers();
+}
+</script>
+
+</body>
+</html>
