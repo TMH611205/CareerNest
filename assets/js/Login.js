@@ -36,22 +36,32 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
         if (result.message === "Đăng nhập thành công") {
 
-            localStorage.setItem("user", JSON.stringify(result.user));
+            const userData = {
+                UserID: result.user.id,
+                name: result.user.name,
+                email: result.user.email,
+                role: result.user.role
+            };
 
-            if (result.message === "Đăng nhập thành công") {
+            localStorage.setItem("user", JSON.stringify(userData));
 
-                localStorage.setItem("user", JSON.stringify(result.user));
+       
+            fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/update_active.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    UserID: userData.UserID
+                })
+            });
 
-                const role = result.user.role;
+            const role = result.user.role;
 
-                if (role === "Student") {
-                    window.location.replace("index.html");
-                } else if (role === "Admin" || role === "Employer") {
-                    window.location.replace("Admin.html");
-                } else {
-                    // fallback nếu role lạ
-                    window.location.replace("index.html");
-                }
+            if (role === "Student") {
+                window.location.replace("index.html");
+            } else if (role === "Admin" || role === "Employer") {
+                window.location.replace("Admin.html");
+            } else {
+                window.location.replace("index.html");
             }
         } else {
             document.getElementById("error").innerText = result.message;

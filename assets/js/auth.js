@@ -32,7 +32,22 @@ function renderAuth() {
 }
 
 // 🚪 Logout
-function logout() {
-    localStorage.removeItem("user");
-    window.location.href = "index.html";
+async function logout() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user && user.UserID) {
+    await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/update_active.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        UserID: user.UserID,
+        status: 'offline'
+      })
+    });
+  }
+
+  localStorage.removeItem("user");
+  window.location.href = "index.html";
 }
+
+

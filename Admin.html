@@ -68,10 +68,10 @@
     </nav>
 
     <div style="padding: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
-      <a href="#" class="nav-item logout-link" onclick="goHome(event)">
-        <i data-lucide="log-out" style="width: 18px;"></i>
-        Quay lại trang chủ
-      </a>
+      <button class="nav-item logout-link" onclick="logout()">
+  <i data-lucide="log-out" style="width: 18px;"></i>
+  Đăng xuất
+</button>
     </div>
   </aside>
 
@@ -480,7 +480,11 @@
     <td>${u.Email}</td>
     <td>${u.Role}</td>
     <td>${u.CreatedAt}</td>
-    <td><span class="status-badge status-active">Hoạt động</span></td>
+    <td>
+  <span class="status-badge ${u.Active === 'online' ? 'status-active' : 'status-inactive'}">
+    ${u.Active === 'online' ? 'Hoạt động' : 'Offline'}
+  </span>
+</td>
     <td>
       <button class="action-btn" title="Xem" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="eye" style="width:14px"></i></button>
       <button class="action-btn" title="Sửa" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="edit-2" style="width:14px"></i></button>
@@ -568,6 +572,19 @@
         document.addEventListener("DOMContentLoaded", function () {
           const user = JSON.parse(localStorage.getItem("user"));
 
+          if (user && user.UserID) {
+            setInterval(() => {
+              console.log("Sending:", user.UserID);
+
+              fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/update_active.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  UserID: user.UserID   
+                })
+              });
+            }, 5000);
+          }
           if (user.role === "Employer") {
             document.querySelector('[data-section="users"]').style.display = 'none';
             document.querySelector('[data-section="majors"]').style.display = 'none';
@@ -595,8 +612,7 @@
         // cập nhật mỗi giây
         setInterval(updateTime, 1000);
       </script>
-
-
+      <script src="assets/js/auth.js"></script>
 
 </body>
 
