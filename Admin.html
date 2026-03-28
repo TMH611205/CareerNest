@@ -69,9 +69,9 @@
 
     <div style="padding: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
       <button class="nav-item logout-link" onclick="logout()">
-  <i data-lucide="log-out" style="width: 18px;"></i>
-  Đăng xuất
-</button>
+        <i data-lucide="log-out" style="width: 18px;"></i>
+        Đăng xuất
+      </button>
     </div>
   </aside>
 
@@ -253,8 +253,7 @@
                   style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-majors">
               </div>
             </div>
-            <button class="btn btn-primary" onclick="openModal('major')"><i data-lucide="plus"></i> Thêm ngành
-              học</button>
+            <button class="btn btn-primary" onclick="openModal('major')"><i data-lucide="plus"></i> Thêm ngành học</button>
           </div>
           <div class="admin-table-container">
             <table class="admin-table" id="table-majors">
@@ -263,6 +262,7 @@
                   <th>Mã ngành</th>
                   <th>Tên ngành</th>
                   <th>Khối ngành</th>
+                  <th>Lương</th>
                   <th>Lượt xem</th>
                   <th>Thao tác</th>
                 </tr>
@@ -448,52 +448,91 @@
         const form = document.getElementById('form');
 
         // OPEN MODAL
-        function openModal(data = null) {
-          document.getElementById('modal').style.display = 'flex';
-          document.getElementById('modal-title').innerText = data ? 'Sửa user' : 'Thêm user';
+        function openModal(type = 'user', data = null, isView = false) {
+          const modal = document.getElementById('modal');
+          const title = document.getElementById('modal-title');
 
-          if (data) {
-            editingId = data.UserID;
-            form.FullName.value = data.FullName;
-            form.Email.value = data.Email;
-            form.Role.value = data.Role;
-          } else {
-            editingId = null;
-            form.reset();
+          modal.style.display = 'flex';
+
+          let disabled = isView ? 'disabled' : '';
+
+          // ================= USER =================
+          if (type === 'user') {
+            title.innerText = isView ? 'Xem user' : (data ? 'Sửa user' : 'Thêm user');
+
+            form.innerHTML = `
+      <div class="form-group">
+        <label>Họ tên</label>
+        <input type="text" name="FullName" value="${data?.FullName || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="Email" value="${data?.Email || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <input type="password" name="Password" placeholder="${isView ? 'Không hiển thị' : 'Nhập mật khẩu mới'}" class="form-control" ${isView ? 'disabled' : ''}>
+      </div>
+
+      <div class="form-group">
+        <label>Vai trò</label>
+        <select name="Role" class="form-control" ${disabled}>
+          <option ${data?.Role === 'Student' ? 'selected' : ''}>Student</option>
+          <option ${data?.Role === 'Admin' ? 'selected' : ''}>Admin</option>
+          <option ${data?.Role === 'Employer' ? 'selected' : ''}>Employer</option>
+        </select>
+      </div>
+
+      ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
+    `;
+
+            editingId = data ? data.UserID : null;
           }
+
+          // ================= MAJOR =================
+          else if (type === 'major') {
+            title.innerText = isView ? 'Xem ngành' : (data ? 'Sửa ngành' : 'Thêm ngành');
+
+            form.innerHTML = `
+      <div class="form-group">
+        <label>Mã ngành</label>
+        <input type="text" name="CareerCode" value="${data?.CareerCode || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Tên ngành</label>
+        <input type="text" name="CareerName" value="${data?.CareerName || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Khối ngành</label>
+        <input type="text" name="Category" value="${data?.Category || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Lương tối thiểu</label>
+        <input type="number" name="SalaryMin" value="${data?.SalaryMin || ''}" class="form-control" ${disabled}>
+      </div>
+
+      <div class="form-group">
+        <label>Lương tối đa</label>
+        <input type="number" name="SalaryMax" value="${data?.SalaryMax || ''}" class="form-control" ${disabled}>
+      </div>
+
+      ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
+    `;
+
+            editingId = data ? data.CareerID : null;
+          }
+          // lưu loại form
+          form.dataset.type = type;
         }
 
         //  CLOSE MODAL
         function closeModal() {
           document.getElementById('modal').style.display = 'none';
-        }
-
-        async function loadUsers() {
-          const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php');
-          const users = await res.json();
-
-          const tbody = document.querySelector('#table-users tbody');
-
-          tbody.innerHTML = users.map(u => `
-  <tr>
-    <td>${u.FullName}</td>
-    <td>${u.Email}</td>
-    <td>${u.Role}</td>
-    <td>${u.CreatedAt}</td>
-    <td>
-  <span class="status-badge ${u.Active === 'online' ? 'status-active' : 'status-inactive'}">
-    ${u.Active === 'online' ? 'Hoạt động' : 'Offline'}
-  </span>
-</td>
-    <td>
-      <button class="action-btn" title="Xem" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="eye" style="width:14px"></i></button>
-      <button class="action-btn" title="Sửa" onclick='openModal(${JSON.stringify(u)})'><i data-lucide="edit-2" style="width:14px"></i></button>
-      <button class="action-btn" style="color: #ef4444;" title="Xóa" onclick="deleteUser(${u.UserID})"><i data-lucide="trash-2" style="width:14px"></i></button>
-    </td>
-  </tr>
-`).join('');
-
-          lucide.createIcons();
         }
 
         form.addEventListener('submit', async (e) => {
@@ -502,45 +541,40 @@
           const formData = new FormData(form);
           const data = Object.fromEntries(formData.entries());
 
-          if (editingId) {
-            data.UserID = editingId;
+          const type = form.dataset.type;
 
-            await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            });
+          let url = '';
+          let method = editingId ? 'PUT' : 'POST';
 
-          } else {
-            await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            });
+          // ===== USER =====
+          if (type === 'user') {
+            url = 'http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php';
+
+            if (editingId) data.UserID = editingId;
+
+            if (!data.Password) delete data.Password;
           }
 
-          closeModal();
-          loadUsers();
-        });
+          // ===== MAJOR =====
+          else if (type === 'major') {
+            url = 'http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php';
 
-        async function deleteUser(id) {
-          if (!confirm('Xóa thật?')) return;
+            if (editingId) data.CareerID = editingId;
+          }
 
-          await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php', {
-            method: 'DELETE',
-            body: `UserID=${id}`
+          await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
           });
 
-          loadUsers();
-        }
+          closeModal();
 
-        window.onload = function () {
-          loadUsers();
-        }
+          if (type === 'user') loadUsers();
+          else loadMajors();
+        });
+
       </script>
-
-      <script src="https://unpkg.com/lucide@latest"></script>
-
       <script>
         // Chuyển section khi click menu
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -580,7 +614,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  UserID: user.UserID   
+                  UserID: user.UserID
                 })
               });
             }, 5000);
@@ -612,7 +646,19 @@
         // cập nhật mỗi giây
         setInterval(updateTime, 1000);
       </script>
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          loadUsers();
+          loadMajors();
+        });
+      </script>
+      <script src="https://unpkg.com/lucide@latest"></script>
+
       <script src="assets/js/auth.js"></script>
+      <script src="assets/js/users.js"></script>
+      <script src="assets/js/majors.js"></script>
+
+
 
 </body>
 

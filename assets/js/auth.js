@@ -31,6 +31,8 @@ function renderAuth() {
     }
 }
 
+
+
 // 🚪 Logout
 async function logout() {
   const user = JSON.parse(localStorage.getItem("user"));
