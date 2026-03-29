@@ -4,6 +4,10 @@ function shortText(text) {
   return text.length > 50 ? text.substring(0, 50) + '...' : text;
 }
 
+ //    <td>${m.Description ? shortText(m.Description) : ''}</td>
+    //   <td>${m.Highlight || ''}</td>
+    //   <td>${renderDemand(m.DemandLevel)}</td>
+    //   <td>${m.Rating ?? 0} (${m.RatingCount ?? 0})</td>  
 
 async function loadMajors() {
   const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php');
@@ -24,10 +28,7 @@ async function loadMajors() {
         <td>${m.CareerName}</td>
         <td>${m.Category || ''}</td>
         <td>${salary}</td>
-    //    <td>${m.Description ? shortText(m.Description) : ''}</td>
-    //   <td>${m.Highlight || ''}</td>
-    //   <td>${renderDemand(m.DemandLevel)}</td>
-    //   <td>${m.Rating ?? 0} (${m.RatingCount ?? 0})</td>     
+      
       <td>${m.Views ?? 0}</td>
     <td>
       <button class="action-btn" title="Xem" onclick="openModal('major', JSON.parse(decodeURIComponent('${safe}')), true)"><i data-lucide="eye" style="width:14px"></i></button>
