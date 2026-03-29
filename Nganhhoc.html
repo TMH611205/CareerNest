@@ -1246,6 +1246,137 @@
     });
   </script>
   </script>
+
+<script>
+let allMajors = [];
+
+// ================= LOAD DATA =================
+async function loadMajorsFrontend() {
+  try {
+    const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php');
+    const data = await res.json();
+
+    allMajors = data;
+    renderMajors(data);
+
+  } catch (err) {
+    console.error("Lỗi load majors:", err);
+  }
+}
+
+// ================= RENDER =================
+function renderMajors(data) {
+  const container = document.getElementById("majors-grid");
+
+  if (!data.length) {
+    container.innerHTML = `<p>Không có ngành nào</p>`;
+    return;
+  }
+
+  container.innerHTML = data.map(m => {
+    const salary = `${formatMoney(m.SalaryMin)} - ${formatMoney(m.SalaryMax)} VNĐ`;
+
+    return `
+      <div class="major-card" 
+           data-category="${mapCategory(m.Category)}"
+           data-title="${m.CareerName}">
+
+        <div class="major-content">
+
+          <div class="flex justify-between items-center mb-4">
+            <span class="major-tag">${m.Category || 'Khác'}</span>
+          </div>
+
+          <h3 class="major-title">${m.CareerName}</h3>
+
+          <p class="major-desc">
+            Ngành ${m.CareerName} thuộc lĩnh vực ${m.Category || 'khác'}.
+          </p>
+
+          <div class="major-stats">
+            <div class="stat-item">
+              <i data-lucide="dollar-sign" style="width: 14px;"></i>
+              ${salary}
+            </div>
+          </div>
+
+          <div class="flex gap-2 mt-6">
+            <button class="btn"
+              onclick="alert('Chi tiết ngành: ${m.CareerName}')"
+              style="flex: 1; border: 1px solid var(--color-brand-blue); color: var(--color-brand-blue); font-size: 12px; padding: 8px;">
+              Xem chi tiết
+            </button>
+          </div>
+
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  lucide.createIcons();
+}
+
+// ================= FORMAT MONEY =================
+function formatMoney(num) {
+  if (!num) return "0";
+  return Number(num).toLocaleString('vi-VN');
+}
+
+// ================= CATEGORY MAP =================
+function mapCategory(category) {
+  if (!category) return 'all';
+
+  category = category.toLowerCase();
+
+  if (category.includes('công nghệ') || category.includes('kỹ thuật')) return 'tech';
+  if (category.includes('kinh tế') || category.includes('quản lý')) return 'business';
+  if (category.includes('y')) return 'health';
+  if (category.includes('nghệ thuật')) return 'art';
+  if (category.includes('xã hội') || category.includes('sư phạm')) return 'social';
+
+  return 'all';
+}
+
+// ================= SEARCH =================
+document.getElementById("major-search-input").addEventListener("input", function () {
+  const keyword = this.value.toLowerCase();
+
+  const filtered = allMajors.filter(m =>
+    m.CareerName.toLowerCase().includes(keyword)
+  );
+
+  renderMajors(filtered);
+});
+
+// ================= FILTER =================
+document.querySelectorAll(".filter-chip").forEach(btn => {
+  btn.addEventListener("click", function () {
+
+    // active UI
+    document.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    const category = this.dataset.category;
+
+    if (category === "all") {
+      renderMajors(allMajors);
+      return;
+    }
+
+    const filtered = allMajors.filter(m =>
+      mapCategory(m.Category) === category
+    );
+
+    renderMajors(filtered);
+  });
+});
+
+// ================= INIT =================
+document.addEventListener("DOMContentLoaded", () => {
+  loadMajorsFrontend();
+});
+</script>
+  
   <script src="assets/js/auth.js"></script>
 
   <script>

@@ -253,8 +253,11 @@
                   style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-majors">
               </div>
             </div>
-            <button class="btn btn-primary" onclick="openModal('major')"><i data-lucide="plus"></i> Thêm ngành học</button>
+            <button class="btn btn-primary" onclick="openModal('major')">
+              <i data-lucide="plus"></i> Thêm ngành học
+            </button>
           </div>
+
           <div class="admin-table-container">
             <table class="admin-table" id="table-majors">
               <thead>
@@ -263,12 +266,17 @@
                   <th>Tên ngành</th>
                   <th>Khối ngành</th>
                   <th>Lương</th>
+                  <!-- <th>Mô tả</th>
+                  <th>Điểm nổi bật</th>
+                  <th>Nhu cầu</th>
+                  <th>Rating </th> -->
                   <th>Lượt xem</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>
+
               <tbody>
-                <!-- Data will be rendered here -->
+                <!-- Data render -->
               </tbody>
             </table>
           </div>
@@ -496,33 +504,54 @@
             title.innerText = isView ? 'Xem ngành' : (data ? 'Sửa ngành' : 'Thêm ngành');
 
             form.innerHTML = `
-      <div class="form-group">
-        <label>Mã ngành</label>
-        <input type="text" name="CareerCode" value="${data?.CareerCode || ''}" class="form-control" ${disabled}>
-      </div>
+    <div class="form-group">
+      <label>Mã ngành</label>
+      <input type="text" name="CareerCode" value="${data?.CareerCode || ''}" class="form-control" ${disabled}>
+    </div>
 
-      <div class="form-group">
-        <label>Tên ngành</label>
-        <input type="text" name="CareerName" value="${data?.CareerName || ''}" class="form-control" ${disabled}>
-      </div>
+    <div class="form-group">
+      <label>Tên ngành</label>
+      <input type="text" name="CareerName" value="${data?.CareerName || ''}" class="form-control" ${disabled}>
+    </div>
 
-      <div class="form-group">
-        <label>Khối ngành</label>
-        <input type="text" name="Category" value="${data?.Category || ''}" class="form-control" ${disabled}>
-      </div>
+    <div class="form-group">
+      <label>Khối ngành</label>
+      <input type="text" name="Category" value="${data?.Category || ''}" class="form-control" ${disabled}>
+    </div>
 
-      <div class="form-group">
-        <label>Lương tối thiểu</label>
-        <input type="number" name="SalaryMin" value="${data?.SalaryMin || ''}" class="form-control" ${disabled}>
-      </div>
+    <div class="form-group">
+      <label>Lương tối thiểu</label>
+      <input type="number" name="SalaryMin" value="${data?.SalaryMin || ''}" class="form-control" ${disabled}>
+    </div>
 
-      <div class="form-group">
-        <label>Lương tối đa</label>
-        <input type="number" name="SalaryMax" value="${data?.SalaryMax || ''}" class="form-control" ${disabled}>
-      </div>
+    <div class="form-group">
+      <label>Lương tối đa</label>
+      <input type="number" name="SalaryMax" value="${data?.SalaryMax || ''}" class="form-control" ${disabled}>
+    </div>
 
-      ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
-    `;
+    <!-- NEW -->
+    <div class="form-group">
+      <label>Mô tả</label>
+      <textarea name="Description" class="form-control" ${disabled}>${data?.Description || ''}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Điểm nổi bật</label>
+      <input type="text" name="Highlight" value="${data?.Highlight || ''}" class="form-control" ${disabled}>
+    </div>
+
+    <div class="form-group">
+      <label>Nhu cầu thị trường</label>
+      <select name="DemandLevel" class="form-control" ${disabled}>
+        <option value="Rất cao" ${data?.DemandLevel === 'Rất cao' ? 'selected' : ''}> Rất cao</option>
+        <option value="Cao" ${data?.DemandLevel === 'Cao' ? 'selected' : ''}> Cao</option>
+        <option value="Trung bình" ${data?.DemandLevel === 'Trung bình' ? 'selected' : ''}> Trung bình</option>
+        <option value="Thấp" ${data?.DemandLevel === 'Thấp' ? 'selected' : ''}> Thấp</option>
+      </select>
+    </div>
+
+    ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
+  `;
 
             editingId = data ? data.CareerID : null;
           }
