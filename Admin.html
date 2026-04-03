@@ -61,10 +61,13 @@
         <i data-lucide="file-text" style="width: 18px;"></i>
         Quản lý Blogs
       </a>
-      <a href="#" class="nav-item" data-section="settings">
-        <i data-lucide="settings" style="width: 18px;"></i>
-        Cài đặt hệ thống
-      </a>
+      <a href="#" class="nav-item" data-section="images">
+        <i data-lucide="image" style="width: 18px;"></i>
+        Quản lý hình ảnh
+        <a href="#" class="nav-item" data-section="settings">
+          <i data-lucide="settings" style="width: 18px;"></i>
+          Cài đặt hệ thống
+        </a>
     </nav>
 
     <div style="padding: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -348,6 +351,39 @@
         </div>
       </section>
 
+      <!-- Image Management -->
+      <section id="section-images" class="admin-section">
+        <div class="admin-card">
+          <div class="card-header">
+            <div class="flex items-center gap-4">
+              <h3 class="card-title">Quản lý hình ảnh</h3>
+              <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm trang, vị trí..." class="form-control"
+                  style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-images">
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="openModal('image')"><i data-lucide="plus"></i> Thêm ảnh
+              mới</button>
+          </div>
+          <div class="admin-table-container">
+            <table class="admin-table" id="table-images">
+              <thead>
+                <tr>
+                  <th>Trang</th>
+                  <th>Vị trí</th>
+                  <th>Hình ảnh</th>
+                  <th>Mô tả</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data will be rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- Settings Section -->
       <section id="section-settings" class="admin-section">
         <div class="admin-card">
@@ -555,6 +591,71 @@
 
             editingId = data ? data.CareerID : null;
           }
+
+          else if (type === 'image') {
+            title.innerText = isView ? 'Xem ảnh' : (data ? 'Sửa ảnh' : 'Thêm ảnh');
+
+            const imageSrc = data?.url
+              ? `http://localhost:9999/CareerNest/CareerNest_Backend/${data.url}`
+              : '';
+
+            form.innerHTML = `
+    <div class="form-group">
+      <label>Trang</label>
+      <input type="text" name="page" value="${data?.page || ''}" class="form-control" ${disabled} placeholder="Ví dụ: Trang chủ, About, Blog...">
+    </div>
+
+    <div class="form-group">
+      <label>Vị trí</label>
+      <input type="text" name="position" value="${data?.position || ''}" class="form-control" ${disabled} placeholder="Ví dụ: Banner, Hero, Footer...">
+    </div>
+
+    <div class="form-group">
+      <label>Mô tả</label>
+      <textarea name="description" class="form-control" ${disabled}>${data?.description || ''}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Chọn ảnh</label>
+      <input type="file" name="image" id="imageFile" class="form-control" accept="image/*" ${isView ? 'disabled' : ''}>
+    </div>
+
+    <div class="form-group" style="text-align:center;">
+      <img id="imagePreview"
+           src="${imageSrc}"
+           alt="Preview"
+           style="max-width:220px;max-height:160px;border-radius:10px;border:1px solid #ddd;display:${imageSrc ? 'inline-block' : 'none'};">
+    </div>
+
+    ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
+  `;
+
+            editingId = data ? Number(data.id) : null;
+            form.dataset.type = 'image';
+
+            setTimeout(() => {
+              const imageInput = document.getElementById("imageFile");
+              const preview = document.getElementById("imagePreview");
+
+              if (imageInput && preview) {
+                imageInput.addEventListener("change", function () {
+                  const file = this.files[0];
+                  if (!file) {
+                    preview.src = "";
+                    preview.style.display = "none";
+                    return;
+                  }
+
+                  const reader = new FileReader();
+                  reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "inline-block";
+                  };
+                  reader.readAsDataURL(file);
+                });
+              }
+            }, 0);
+          }
           // lưu loại form
           form.dataset.type = type;
         }
@@ -562,8 +663,10 @@
         //  CLOSE MODAL
         function closeModal() {
           document.getElementById('modal').style.display = 'none';
+          editingId = null;
+          form.reset();
+          form.dataset.type = '';
         }
-
         form.addEventListener('submit', async (e) => {
           e.preventDefault();
 
@@ -574,6 +677,28 @@
 
           let url = '';
           let method = editingId ? 'PUT' : 'POST';
+
+          // ===== IMAGE =====
+          if (type === 'image') {
+            let imageUrl = 'http://localhost:9999/CareerNest/CareerNest_Backend/api/images.php';
+
+            if (editingId) {
+              formData.append('id', editingId);
+              formData.append('_method', 'PUT');
+            }
+
+            const res = await fetch(imageUrl, {
+              method: 'POST',
+              body: formData
+            });
+
+            const result = await res.json();
+            alert(result.message || result.error || 'Thao tác thành công');
+
+            closeModal();
+            loadImages();
+            return;
+          }
 
           // ===== USER =====
           if (type === 'user') {
@@ -679,6 +804,7 @@
         window.addEventListener("DOMContentLoaded", () => {
           loadUsers();
           loadMajors();
+          loadImages();
         });
       </script>
       <script src="https://unpkg.com/lucide@latest"></script>
@@ -686,6 +812,11 @@
       <script src="assets/js/auth.js"></script>
       <script src="assets/js/users.js"></script>
       <script src="assets/js/majors.js"></script>
+      <script src="assets/js/majors.js"></script>
+      <script src="assets/js/images.js"></script>
+      <script src="assets/js/blogs.js"></script>
+      <script src="assets/js/quizzes.js"></script>
+      <script src="assets/js/overview.js"></script>
 
 
 
