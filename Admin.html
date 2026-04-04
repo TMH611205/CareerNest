@@ -64,10 +64,15 @@
       <a href="#" class="nav-item" data-section="images">
         <i data-lucide="image" style="width: 18px;"></i>
         Quản lý hình ảnh
-        <a href="#" class="nav-item" data-section="settings">
-          <i data-lucide="settings" style="width: 18px;"></i>
-          Cài đặt hệ thống
-        </a>
+      </a>
+      <a href="#" class="nav-item" data-section="reviews">
+        <i data-lucide="message-square" style="width: 18px;"></i>
+        Quản lý đánh giá
+      </a>
+      <a href="#" class="nav-item" data-section="settings">
+        <i data-lucide="settings" style="width: 18px;"></i>
+        Cài đặt hệ thống
+      </a>
     </nav>
 
     <div style="padding: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -100,7 +105,7 @@
             <p id="adminRole" style="margin: 0; font-size: 12px; color: var(--admin-text-muted);"></p>
           </div>
 
-          <img id="adminAvatar" src="https://i.pravatar.cc/150" alt="Avatar"
+          <img id="adminAvatar" alt="Avatar"
             style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.1);"
             referrerPolicy="no-referrer">
         </div>
@@ -384,6 +389,38 @@
         </div>
       </section>
 
+      <!-- Reviews Management -->
+      <section id="section-reviews" class="admin-section">
+        <div class="admin-card">
+          <div class="card-header">
+            <div class="flex items-center gap-4">
+              <h3 class="card-title">Quản lý đánh giá</h3>
+              <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm đánh giá..." class="form-control"
+                  style="width: 250px; padding: 6px 12px; font-size: 13px;" id="search-reviews">
+              </div>
+            </div>
+          </div>
+          <div class="admin-table-container">
+            <table class="admin-table" id="table-reviews">
+              <thead>
+                <tr>
+                  <th>Người dùng</th>
+                  <th>Đánh giá</th>
+                  <th>Nội dung</th>
+                  <th>Ngày</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data will be rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- Settings Section -->
       <section id="section-settings" class="admin-section">
         <div class="admin-card">
@@ -464,7 +501,6 @@
           // Hiển thị tên
           document.getElementById("adminName").innerText = user.name;
 
-
           let roleText = "";
           if (user.role === "Admin") roleText = "Quản trị viên";
           else if (user.role === "Employer") roleText = "Nhà tuyển dụng";
@@ -472,9 +508,29 @@
 
           document.getElementById("adminRole").innerText = roleText;
 
-          // Avatar random theo email (không bị trùng)
-          document.getElementById("adminAvatar").src =
-            "https://i.pravatar.cc/150?u=" + user.email;
+          // ===== LẤY AVATAR TỪ DB =====
+          fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php')
+            .then(res => res.json())
+            .then(users => {
+              const currentUser = users.find(u =>
+                u.FullName && user.name &&
+                u.FullName.toLowerCase().trim() === user.name.toLowerCase().trim()
+              );
+
+              if (currentUser && currentUser.AvatarURL) {
+                document.getElementById("adminAvatar").src =
+                  "http://localhost:9999/CareerNest/CareerNest_Backend/" + currentUser.AvatarURL;
+              } else {
+                // fallback nếu không có ảnh
+                document.getElementById("adminAvatar").src =
+                  "https://i.pravatar.cc/150?u=" + user.email;
+              }
+            })
+            .catch(() => {
+              // fallback nếu lỗi API
+              document.getElementById("adminAvatar").src =
+                "https://i.pravatar.cc/150?u=" + user.email;
+            });
         }
       </script>
       <script>
@@ -593,19 +649,20 @@
           }
 
           else if (type === 'image') {
-  title.innerText = isView ? 'Xem ảnh' : (data ? 'Sửa ảnh' : 'Thêm ảnh');
+            title.innerText = isView ? 'Xem ảnh' : (data ? 'Sửa ảnh' : 'Thêm ảnh');
 
-  const imageSrc = data?.url
-    ? `http://localhost:9999/CareerNest/CareerNest_Backend/${data.url}`
-    : '';
+            const imageSrc = data?.url
+              ? `http://localhost:9999/CareerNest/CareerNest_Backend/${data.url}`
+              : '';
 
-  form.innerHTML = `
+            form.innerHTML = `
     <div class="form-group">
       <label>Trang</label>
       <select name="page" id="imagePage" class="form-control" ${disabled}>
         <option value="">-- Chọn trang --</option>
         <option value="Trang chủ" ${data?.page === 'Trang chủ' ? 'selected' : ''}>Trang chủ</option>
         <option value="Ngành học" ${data?.page === 'Ngành học' ? 'selected' : ''}>Ngành học</option>
+         <option value="Người dùng" ${data?.page === 'Người dùng' ? 'selected' : ''}>Người dùng</option>
         <option value="Blogs" ${data?.page === 'Blogs' ? 'selected' : ''}>Blogs</option>
         <option value="Về CareerNest" ${data?.page === 'Về CareerNest' ? 'selected' : ''}>Về CareerNest</option>
         <option value="Đăng nhập" ${data?.page === 'Đăng nhập' ? 'selected' : ''}>Đăng nhập</option>
@@ -641,82 +698,168 @@
     ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
   `;
 
-  editingId = data ? Number(data.id) : null;
-  form.dataset.type = 'image';
+            editingId = data ? Number(data.id) : null;
+            form.dataset.type = 'image';
 
-  setTimeout(async () => {
-    const pageSelect = document.getElementById("imagePage");
-    const positionSelect = document.getElementById("imagePosition");
-    const imageInput = document.getElementById("imageFile");
-    const preview = document.getElementById("imagePreview");
+            setTimeout(async () => {
+              const pageSelect = document.getElementById("imagePage");
+              const positionSelect = document.getElementById("imagePosition");
+              const imageInput = document.getElementById("imageFile");
+              const preview = document.getElementById("imagePreview");
 
-    async function loadPositionOptions(page, selectedValue = '') {
-      positionSelect.innerHTML = `<option value="">-- Chọn vị trí --</option>`;
+              async function loadPositionOptions(page, selectedValue = '') {
+                positionSelect.innerHTML = `<option value="">-- Chọn vị trí --</option>`;
 
-      if (!page) return;
+                if (!page) return;
 
-      // Các vị trí cố định
-      const fixedPositions = {
-        'Trang chủ': ['Logo chính', 'Hero background', 'Testimonial avatar - Nguyễn Văn An', 'Testimonial avatar - Trần Thị Bình', 'Testimonial avatar - User Cuong'],
-        'Blogs': ['Bài viết 1', 'Bài viết 2', 'Bài viết 3', 'Bài viết 4', 'Bài viết 5', 'Bài viết 6', 'Bài viết 7', 'Bài viết 8', 'Bài viết 9'],
-        'Về CareerNest': ['Hero/Content image - Team collaboration', 'Team - Founder', 'Team - Psychologist'],
-        'Đăng nhập': ['Poster bên trái'],
-        'Đăng ký': ['Banner illustration'],
-        'Admin': ['Avatar mặc định']
-      };
+                // Các vị trí cố định
+                const fixedPositions = {
+                  'Trang chủ': [
+                    'Logo chính',
+                    'Hero background',
+                    'Testimonial avatar - Nguyễn Văn An',
+                    'Testimonial avatar - Trần Thị Bình',
+                    'Testimonial avatar - User Cuong'
+                  ],
+                  'Blogs': [
+                    'Bài viết 1',
+                    'Bài viết 2',
+                    'Bài viết 3',
+                    'Bài viết 4',
+                    'Bài viết 5',
+                    'Bài viết 6',
+                    'Bài viết 7',
+                    'Bài viết 8',
+                    'Bài viết 9'
+                  ],
+                  'Về CareerNest': [
+                    'Hero/Content image - Team collaboration',
+                    'Team - Founder',
+                    'Team - Psychologist'
+                  ],
+                  'Đăng nhập': ['Poster bên trái'],
+                  'Đăng ký': ['Banner illustration'],
+                  'Admin': ['Avatar mặc định']
+                };
 
-      // Nếu là Ngành học => lấy động từ bảng majors
-      if (page === 'Ngành học') {
-        try {
-          const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php');
-          const majors = await res.json();
+                // Nếu là Ngành học => lấy động từ bảng majors
+                if (page === 'Ngành học') {
+                  try {
+                    const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php');
+                    const majors = await res.json();
 
-          majors.forEach(m => {
-            const option = document.createElement('option');
-            option.value = m.CareerName;
-            option.textContent = m.CareerName;
-            if (selectedValue === m.CareerName) option.selected = true;
-            positionSelect.appendChild(option);
-          });
-        } catch (err) {
-          console.error('Lỗi load ngành học:', err);
-        }
-      } else {
-        (fixedPositions[page] || []).forEach(pos => {
-          const option = document.createElement('option');
-          option.value = pos;
-          option.textContent = pos;
-          if (selectedValue === pos) option.selected = true;
-          positionSelect.appendChild(option);
-        });
-      }
-    }
+                    majors.forEach(m => {
+                      const option = document.createElement('option');
+                      option.value = m.CareerName;
+                      option.textContent = m.CareerName;
+                      if (selectedValue === m.CareerName) option.selected = true;
+                      positionSelect.appendChild(option);
+                    });
+                  } catch (err) {
+                    console.error('Lỗi load ngành học:', err);
+                  }
+                  return;
+                }
 
-    await loadPositionOptions(pageSelect.value, data?.position || '');
+                // Nếu là Người dùng => lấy động từ bảng users
+                if (page === 'Người dùng') {
+                  try {
+                    const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/users.php');
+                    const users = await res.json();
 
-    pageSelect.addEventListener('change', async function () {
-      await loadPositionOptions(this.value, '');
-    });
+                    users.forEach(u => {
+                      const option = document.createElement('option');
+                      option.value = u.FullName;
+                      option.textContent = u.FullName;
 
-    if (imageInput && preview) {
-      imageInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (!file) {
-          preview.src = "";
-          preview.style.display = "none";
-          return;
-        }
+                      if (selectedValue === u.FullName) option.selected = true;
 
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          preview.src = e.target.result;
-          preview.style.display = "inline-block";
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  }, 0);
-}
+                      positionSelect.appendChild(option);
+                    });
+                  } catch (err) {
+                    console.error('Lỗi load users:', err);
+                  }
+                  return;
+                }
+
+                // Các trang cố định
+                (fixedPositions[page] || []).forEach(pos => {
+                  const option = document.createElement('option');
+                  option.value = pos;
+                  option.textContent = pos;
+                  if (selectedValue === pos) option.selected = true;
+                  positionSelect.appendChild(option);
+                });
+              }
+              await loadPositionOptions(pageSelect.value, data?.position || '');
+
+              pageSelect.addEventListener('change', async function () {
+                await loadPositionOptions(this.value, '');
+              });
+
+              if (imageInput && preview) {
+                imageInput.addEventListener("change", function () {
+                  const file = this.files[0];
+                  if (!file) {
+                    preview.src = "";
+                    preview.style.display = "none";
+                    return;
+                  }
+
+                  const reader = new FileReader();
+                  reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "inline-block";
+                  };
+                  reader.readAsDataURL(file);
+                });
+              }
+            }, 0);
+          }
+
+          else if (type === 'review') {
+            title.innerText = isView ? 'Xem đánh giá' : (data ? 'Sửa trạng thái đánh giá' : 'Thêm đánh giá');
+
+            form.innerHTML = `
+    <div class="form-group">
+      <label>Người dùng</label>
+      <input type="text" value="${data?.FullName || ''}" class="form-control" disabled>
+    </div>
+
+    <div class="form-group">
+      <label>Ngành học</label>
+      <input type="text" value="${data?.CareerName || ''}" class="form-control" disabled>
+    </div>
+
+    <div class="form-group">
+      <label>Số sao</label>
+      <input type="text" value="${data?.Rating || ''} / 5" class="form-control" disabled>
+    </div>
+
+    <div class="form-group">
+      <label>Nội dung</label>
+      <textarea class="form-control" disabled>${data?.Comment || ''}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Ngày tạo</label>
+      <input type="text" value="${data?.CreatedAt || ''}" class="form-control" disabled>
+    </div>
+
+    <div class="form-group">
+      <label>Trạng thái</label>
+      <select name="Status" class="form-control" ${isView ? 'disabled' : ''}>
+        <option value="Chờ duyệt" ${data?.Status === 'Chờ duyệt' ? 'selected' : ''}>Chờ duyệt</option>
+        <option value="Đã duyệt" ${data?.Status === 'Đã duyệt' ? 'selected' : ''}>Đã duyệt</option>
+        <option value="Từ chối" ${data?.Status === 'Từ chối' ? 'selected' : ''}>Từ chối</option>
+      </select>
+    </div>
+
+    ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
+  `;
+
+            editingId = data ? Number(data.ReviewID) : null;
+          }
           // lưu loại form
           form.dataset.type = type;
         }
@@ -758,6 +901,27 @@
 
             closeModal();
             loadImages();
+            return;
+          }
+
+          // ===== REVIEW =====
+          if (type === 'review') {
+            const payload = {
+              ReviewID: editingId,
+              Status: data.Status
+            };
+
+            const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/reviews_admin.php', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            alert(result.message || result.error || 'Cập nhật thành công');
+
+            closeModal();
+            loadReviews();
             return;
           }
 
@@ -866,6 +1030,7 @@
           loadUsers();
           loadMajors();
           loadImages();
+          loadReviews();
         });
       </script>
       <script src="https://unpkg.com/lucide@latest"></script>
@@ -877,7 +1042,7 @@
       <script src="assets/js/images.js"></script>
       <script src="assets/js/blogs.js"></script>
       <script src="assets/js/quizzes.js"></script>
-      <script src="assets/js/overview.js"></script>
+      <script src="assets/js/reviews.js"></script>
 
 
 
