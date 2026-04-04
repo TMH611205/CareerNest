@@ -44,7 +44,7 @@
     <nav class="navbar">
       <div class="container flex justify-between items-center">
         <a href="Index.html" style="display:flex;align-items:center;gap:8px;">
-          <img src="assets/img/Logo_xoaphong.png"  alt="CareerNest" class="navbar-logo" >
+          <img src="assets/img/Logo_xoaphong.png" alt="CareerNest" class="navbar-logo">
           <div>
             <div style="font-weight:800;font-size:18px;">
               <span class="career">Career</span><span class="nest">Nest</span>
@@ -159,46 +159,8 @@
           <h2 class="section-title">Đánh Giá Từ Người Dùng</h2>
           <p class="section-desc">Hàng ngàn học sinh, sinh viên đã tìm thấy định hướng đúng đắn nhờ CareerNest.</p>
         </div>
-        <div class="testimonial-grid">
-          <div class="testimonial-card reveal-up">
-            <div class="quote-icon">"</div>
-            <p class="testimonial-quote">"Nhờ CareerNest mà mình đã tìm thấy đam mê thực sự với ngành Công nghệ thông
-              tin. Các bài trắc nghiệm rất sát thực tế!"</p>
-            <div class="testimonial-user">
-              <img  alt="User An" class="testimonial-avatar"
-                data-image-position="user1" referrerPolicy="no-referrer">
-              <div class="testimonial-info">
-                <h4>Nguyễn Văn An</h4>
-                <p>Học sinh lớp 12</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card reveal-up">
-            <div class="quote-icon">"</div>
-            <p class="testimonial-quote">"Trang web rất dễ sử dụng, giao diện đẹp và kết quả trắc nghiệm khá sát với
-              tính cách của mình. Rất đáng trải nghiệm!"</p>
-            <div class="testimonial-user">
-              <img  alt="User Binh" class="testimonial-avatar"
-                data-image-position="user2" referrerPolicy="no-referrer">
-              <div class="testimonial-info">
-                <h4>Trần Thị Bình</h4>
-                <p>Sinh viên năm nhất</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card reveal-up">
-            <div class="quote-icon">"</div>
-            <p class="testimonial-quote">"Thông tin về các trường đại học và ngành học rất chi tiết. Mình đã có cái nhìn
-              tổng quan hơn về tương lai nghề nghiệp."</p>
-            <div class="testimonial-user">
-              <img  alt="User Cuong" class="testimonial-avatar"
-                data-image-position="user3" referrerPolicy="no-referrer">
-              <div class="testimonial-info">
-                <h4>Lê Văn Cường</h4>
-                <p>Học sinh lớp 11</p>
-              </div>
-            </div>
-          </div>
+        <div class="testimonial-grid" id="testimonial-list">
+
         </div>
       </div>
     </section>
@@ -376,9 +338,14 @@
     renderAuth();
   </script>
   <script src="assets/js/site_images.js"></script>
+  <script src="assets/js/reviews.js"></script>
+
   <script>
     loadPageImages('Trang chủ');
-    loadPageImages('Global');
+    loadPageImages('Global'); 
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", loadTestimonials);
   </script>
 </body>
 

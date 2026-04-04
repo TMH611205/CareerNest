@@ -100,3 +100,45 @@ async function deleteReview(reviewId) {
     alert(result.message || result.error || 'Xóa thành công');
     loadReviews();
 }
+
+async function loadTestimonials() {
+      try {
+        const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/testimonials.php');
+        const data = await res.json();
+
+        console.log('Testimonials data:', data);
+
+        const container = document.getElementById('testimonial-list');
+        console.log('Container:', container);
+
+        if (!container) return;
+
+        if (!Array.isArray(data) || !data.length) {
+          container.innerHTML = `<p>Chưa có đánh giá nào</p>`;
+          return;
+        }
+
+        container.innerHTML = data.map(r => {
+          const avatar = r.AvatarURL
+            ? `http://localhost:9999/CareerNest/CareerNest_Backend/${r.AvatarURL}`
+            : `https://i.pravatar.cc/150?u=${encodeURIComponent(r.FullName || 'user')}`;
+
+          return `
+        <div class="testimonial-card" style="background:#fff;padding:24px;border-radius:20px;border:1px solid #eee;">
+          <div style="font-size:40px; color:#f27d26;"></div>
+          <p style="margin:12px 0 20px;">${r.Comment || ''}</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="${avatar}" alt="${r.FullName || ''}" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+            <div>
+              <h4 style="margin:0;">${r.FullName || 'Người dùng'}</h4>
+              <p style="margin:4px 0 0;color:#666;">${r.CareerName || ''}</p>
+            </div>
+          </div>
+        </div>
+      `;
+        }).join('');
+      } catch (err) {
+        console.error("Lỗi loadTestimonials:", err);
+      }
+    }
+
