@@ -25,8 +25,9 @@ function renderMajors(data) {
 
   container.innerHTML = data.map(m => {
     const salary = `${formatMoney(m.SalaryMin)} - ${formatMoney(m.SalaryMax)} VNĐ`;
-    // ảnh random theo ngành
-   const img = `https://source.unsplash.com/600x400/?${encodeURIComponent(m.CareerName)}`;
+    const img = m.ImageURL
+  ? `http://localhost:9999/CareerNest/CareerNest_Backend/${m.ImageURL}`
+  : 'assets/img/default.jpg';
 
     // rating
     const rating = Math.round(m.Rating || 0);
@@ -41,7 +42,7 @@ function renderMajors(data) {
     return `
       <div class="major-card" data-category="${mapCategory(m.Category)}" data-title="${m.CareerName}">
             <div style="position: relative;"> 
-           <img src="${img}" class="major-img" alt="${m.CareerName}" referrerPolicy="no-referrer">
+          <img src="${img}" class="major-img" alt="${m.CareerName}" referrerPolicy="no-referrer">
               <div
                 style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; color: var(--color-brand-blue);">
                 ${rating10}/10 Hài lòng </div>

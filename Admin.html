@@ -593,21 +593,32 @@
           }
 
           else if (type === 'image') {
-            title.innerText = isView ? 'Xem ảnh' : (data ? 'Sửa ảnh' : 'Thêm ảnh');
+  title.innerText = isView ? 'Xem ảnh' : (data ? 'Sửa ảnh' : 'Thêm ảnh');
 
-            const imageSrc = data?.url
-              ? `http://localhost:9999/CareerNest/CareerNest_Backend/${data.url}`
-              : '';
+  const imageSrc = data?.url
+    ? `http://localhost:9999/CareerNest/CareerNest_Backend/${data.url}`
+    : '';
 
-            form.innerHTML = `
+  form.innerHTML = `
     <div class="form-group">
       <label>Trang</label>
-      <input type="text" name="page" value="${data?.page || ''}" class="form-control" ${disabled} placeholder="Ví dụ: Trang chủ, About, Blog...">
+      <select name="page" id="imagePage" class="form-control" ${disabled}>
+        <option value="">-- Chọn trang --</option>
+        <option value="Trang chủ" ${data?.page === 'Trang chủ' ? 'selected' : ''}>Trang chủ</option>
+        <option value="Ngành học" ${data?.page === 'Ngành học' ? 'selected' : ''}>Ngành học</option>
+        <option value="Blogs" ${data?.page === 'Blogs' ? 'selected' : ''}>Blogs</option>
+        <option value="Về CareerNest" ${data?.page === 'Về CareerNest' ? 'selected' : ''}>Về CareerNest</option>
+        <option value="Đăng nhập" ${data?.page === 'Đăng nhập' ? 'selected' : ''}>Đăng nhập</option>
+        <option value="Đăng ký" ${data?.page === 'Đăng ký' ? 'selected' : ''}>Đăng ký</option>
+        <option value="Admin" ${data?.page === 'Admin' ? 'selected' : ''}>Admin</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label>Vị trí</label>
-      <input type="text" name="position" value="${data?.position || ''}" class="form-control" ${disabled} placeholder="Ví dụ: Banner, Hero, Footer...">
+      <select name="position" id="imagePosition" class="form-control" ${disabled}>
+        <option value="">-- Chọn vị trí --</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -630,32 +641,82 @@
     ${!isView ? `<button type="submit" class="btn btn-primary">Lưu</button>` : ''}
   `;
 
-            editingId = data ? Number(data.id) : null;
-            form.dataset.type = 'image';
+  editingId = data ? Number(data.id) : null;
+  form.dataset.type = 'image';
 
-            setTimeout(() => {
-              const imageInput = document.getElementById("imageFile");
-              const preview = document.getElementById("imagePreview");
+  setTimeout(async () => {
+    const pageSelect = document.getElementById("imagePage");
+    const positionSelect = document.getElementById("imagePosition");
+    const imageInput = document.getElementById("imageFile");
+    const preview = document.getElementById("imagePreview");
 
-              if (imageInput && preview) {
-                imageInput.addEventListener("change", function () {
-                  const file = this.files[0];
-                  if (!file) {
-                    preview.src = "";
-                    preview.style.display = "none";
-                    return;
-                  }
+    async function loadPositionOptions(page, selectedValue = '') {
+      positionSelect.innerHTML = `<option value="">-- Chọn vị trí --</option>`;
 
-                  const reader = new FileReader();
-                  reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = "inline-block";
-                  };
-                  reader.readAsDataURL(file);
-                });
-              }
-            }, 0);
-          }
+      if (!page) return;
+
+      // Các vị trí cố định
+      const fixedPositions = {
+        'Trang chủ': ['Logo chính', 'Hero background', 'Testimonial avatar - Nguyễn Văn An', 'Testimonial avatar - Trần Thị Bình', 'Testimonial avatar - User Cuong'],
+        'Blogs': ['Bài viết 1', 'Bài viết 2', 'Bài viết 3', 'Bài viết 4', 'Bài viết 5', 'Bài viết 6', 'Bài viết 7', 'Bài viết 8', 'Bài viết 9'],
+        'Về CareerNest': ['Hero/Content image - Team collaboration', 'Team - Founder', 'Team - Psychologist'],
+        'Đăng nhập': ['Poster bên trái'],
+        'Đăng ký': ['Banner illustration'],
+        'Admin': ['Avatar mặc định']
+      };
+
+      // Nếu là Ngành học => lấy động từ bảng majors
+      if (page === 'Ngành học') {
+        try {
+          const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/majors.php');
+          const majors = await res.json();
+
+          majors.forEach(m => {
+            const option = document.createElement('option');
+            option.value = m.CareerName;
+            option.textContent = m.CareerName;
+            if (selectedValue === m.CareerName) option.selected = true;
+            positionSelect.appendChild(option);
+          });
+        } catch (err) {
+          console.error('Lỗi load ngành học:', err);
+        }
+      } else {
+        (fixedPositions[page] || []).forEach(pos => {
+          const option = document.createElement('option');
+          option.value = pos;
+          option.textContent = pos;
+          if (selectedValue === pos) option.selected = true;
+          positionSelect.appendChild(option);
+        });
+      }
+    }
+
+    await loadPositionOptions(pageSelect.value, data?.position || '');
+
+    pageSelect.addEventListener('change', async function () {
+      await loadPositionOptions(this.value, '');
+    });
+
+    if (imageInput && preview) {
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) {
+          preview.src = "";
+          preview.style.display = "none";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = "inline-block";
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }, 0);
+}
           // lưu loại form
           form.dataset.type = type;
         }

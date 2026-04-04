@@ -7,6 +7,7 @@ async function loadImages() {
   try {
     const res = await fetch('http://localhost:9999/CareerNest/CareerNest_Backend/api/images.php');
     const data = await res.json();
+    
 
     const tbody = document.querySelector('#table-images tbody');
     if (!tbody) return;
