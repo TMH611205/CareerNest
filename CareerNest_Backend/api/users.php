@@ -1,89 +1,170 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-require_once __DIR__ . "/../config/database.php";
 
-header("Content-Type: application/json");
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    exit;
+}
+
+require_once __DIR__ . "/../config/database.php";
+header("Content-Type: application/json; charset=UTF-8");
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+function jsonResponse($data) {
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+function buildImageUrl($path) {
+    if (!$path) return "";
+    if (preg_match('/^https?:\/\//i', $path)) return $path;
+    return "http://localhost:9999/CareerNest/CareerNest_Backend/" . ltrim($path, '/');
+}
+
 switch ($method) {
 
+    case 'GET':
+        $sql = "SELECT 
+                    u.UserID,
+                    u.FullName,
+                    u.Email,
+                    u.Role,
+                    u.CreatedAt,
+                    u.Active,
+                    i.url AS AvatarURL
+                FROM Users u
+                LEFT JOIN images i
+                    ON i.page = 'Người dùng'
+                    AND TRIM(i.position) = TRIM(CAST(u.UserID AS CHAR))
+                ORDER BY u.UserID DESC";
 
-case 'GET':
-    $result = $conn->query("SELECT 
-            u.UserID,
-            u.FullName,
-            u.Email,
-            u.Role,
-            u.CreatedAt,
-            u.Active,
-            i.url AS AvatarURL
-        FROM Users u
-        LEFT JOIN images i
-            ON i.page = 'Người dùng'
-            AND LOWER(TRIM(i.position)) = LOWER(TRIM(u.FullName))
-    ");
+        $result = $conn->query($sql);
 
-    $data = [];
+        if (!$result) {
+            jsonResponse(["error" => $conn->error]);
+        }
 
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
+        $data = [];
 
-    echo json_encode($data);
-    break;
-    //  thêm user
+        while ($row = $result->fetch_assoc()) {
+            $row['AvatarFullURL'] = !empty($row['AvatarURL'])
+                ? buildImageUrl($row['AvatarURL'])
+                : '';
+            $data[] = $row;
+        }
+
+        jsonResponse($data);
+        break;
+
     case 'POST':
         $input = json_decode(file_get_contents("php://input"), true);
 
-        $name = $input['FullName'];
-        $email = $input['Email'];
-        $password = password_hash($input['Password'], PASSWORD_DEFAULT);
-        $role = $input['Role'];
+        $name = trim($input['FullName'] ?? '');
+        $email = trim($input['Email'] ?? '');
+        $passwordRaw = trim($input['Password'] ?? '');
+        $role = trim($input['Role'] ?? 'Student');
 
-        $sql = "INSERT INTO Users (FullName, Email, PasswordHash, Role)
-                VALUES ('$name', '$email', '$password', '$role')";
+        if ($name === '' || $email === '' || $passwordRaw === '') {
+            jsonResponse(["error" => "Vui lòng nhập đầy đủ họ tên, email và mật khẩu"]);
+        }
 
-        if ($conn->query($sql)) {
-            echo json_encode(["message" => "Thêm thành công"]);
+        $password = password_hash($passwordRaw, PASSWORD_DEFAULT);
+
+        $stmt = $conn->prepare("
+            INSERT INTO Users (FullName, Email, PasswordHash, Role)
+            VALUES (?, ?, ?, ?)
+        ");
+
+        if (!$stmt) {
+            jsonResponse(["error" => $conn->error]);
+        }
+
+        $stmt->bind_param("ssss", $name, $email, $password, $role);
+
+        if ($stmt->execute()) {
+            jsonResponse(["message" => "Thêm thành công"]);
         } else {
-            echo json_encode(["error" => $conn->error]);
+            jsonResponse(["error" => $stmt->error ?: $conn->error]);
         }
         break;
 
-    //  sửa user
     case 'PUT':
         $input = json_decode(file_get_contents("php://input"), true);
 
-        $id = $input['UserID'];
-        $name = $input['FullName'];
-        $email = $input['Email'];
-        $role = $input['Role'];
+        $id = intval($input['UserID'] ?? 0);
+        $name = trim($input['FullName'] ?? '');
+        $email = trim($input['Email'] ?? '');
+        $role = trim($input['Role'] ?? '');
+        $passwordRaw = trim($input['Password'] ?? '');
 
-        // nếu có nhập password mới
-        if (!empty($input['Password'])) {
-            $password = password_hash($input['Password'], PASSWORD_DEFAULT);
-            $sql = "UPDATE Users 
-                    SET FullName='$name', Email='$email', Role='$role', PasswordHash='$password'
-                    WHERE UserID=$id";
-        } else {
-            $sql = "UPDATE Users 
-                    SET FullName='$name', Email='$email', Role='$role'
-                    WHERE UserID=$id";
+        if ($id <= 0) {
+            jsonResponse(["error" => "Thiếu UserID"]);
         }
 
-        $conn->query($sql);
-        echo json_encode(["message" => "Cập nhật thành công"]);
+        if ($name === '' || $email === '' || $role === '') {
+            jsonResponse(["error" => "Vui lòng nhập đầy đủ thông tin"]);
+        }
+
+        if ($passwordRaw !== '') {
+            $password = password_hash($passwordRaw, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("
+                UPDATE Users
+                SET FullName = ?, Email = ?, Role = ?, PasswordHash = ?
+                WHERE UserID = ?
+            ");
+
+            if (!$stmt) {
+                jsonResponse(["error" => $conn->error]);
+            }
+
+            $stmt->bind_param("ssssi", $name, $email, $role, $password, $id);
+        } else {
+            $stmt = $conn->prepare("
+                UPDATE Users
+                SET FullName = ?, Email = ?, Role = ?
+                WHERE UserID = ?
+            ");
+
+            if (!$stmt) {
+                jsonResponse(["error" => $conn->error]);
+            }
+
+            $stmt->bind_param("sssi", $name, $email, $role, $id);
+        }
+
+        if ($stmt->execute()) {
+            jsonResponse(["message" => "Cập nhật thành công"]);
+        } else {
+            jsonResponse(["error" => $stmt->error ?: $conn->error]);
+        }
         break;
 
     case 'DELETE':
         parse_str(file_get_contents("php://input"), $input);
-        $id = $input['UserID'];
+        $id = intval($input['UserID'] ?? 0);
 
-        $conn->query("DELETE FROM Users WHERE UserID=$id");
+        if ($id <= 0) {
+            jsonResponse(["error" => "Thiếu UserID"]);
+        }
 
-        echo json_encode(["message" => "Xóa thành công"]);
+        $stmt = $conn->prepare("DELETE FROM Users WHERE UserID = ?");
+        if (!$stmt) {
+            jsonResponse(["error" => $conn->error]);
+        }
+
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            jsonResponse(["message" => "Xóa thành công"]);
+        } else {
+            jsonResponse(["error" => $stmt->error ?: $conn->error]);
+        }
         break;
+
+    default:
+        jsonResponse(["error" => "Phương thức không hợp lệ"]);
 }
+?>

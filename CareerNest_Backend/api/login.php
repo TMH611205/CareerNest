@@ -10,12 +10,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . "/../config/database.php";
 
+function buildImageUrl($path) {
+    if (!$path) return "";
+    if (preg_match('/^https?:\/\//i', $path)) return $path;
+    return "http://localhost:9999/CareerNest/CareerNest_Backend/" . ltrim($path, '/');
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['email']) || !isset($data['password'])) {
     echo json_encode([
         "message" => "Thiếu email hoặc mật khẩu"
-    ]);
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -43,7 +49,7 @@ if (!$stmt) {
     echo json_encode([
         "message" => "Lỗi prepare SQL",
         "error" => $conn->error
-    ]);
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -60,14 +66,14 @@ if ($row = $result->fetch_assoc()) {
                 "name" => $row['FullName'],
                 "email" => $row['Email'],
                 "role" => $row['Role'],
-                "avatar" => $row['AvatarURL'] ?? "",
+                "avatar" => $row['AvatarURL'] ? buildImageUrl($row['AvatarURL']) : "",
                 "active" => $row['Active'] ?? "offline"
             ]
-        ]);
+        ], JSON_UNESCAPED_UNICODE);
         exit;
     }
 }
 
 echo json_encode([
     "message" => "Sai email hoặc mật khẩu"
-]);
+], JSON_UNESCAPED_UNICODE);
