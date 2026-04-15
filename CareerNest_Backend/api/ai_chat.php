@@ -9,6 +9,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 header("Content-Type: application/json; charset=UTF-8");
 
+$envPath = __DIR__ . '/../.env';
+
+if (file_exists($envPath)) {
+    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+
+        if ($line === '' || str_starts_with($line, '#')) continue;
+
+        if (strpos($line, '=') !== false) {
+            [$key, $value] = explode('=', $line, 2);
+            $_ENV[trim($key)] = trim($value);
+        }
+    }
+}
+
+// =========================
+// API KEY
+// =========================
+$apiKey = $_ENV['GEMINI_API_KEY'] ?? '';
+
+if (!$apiKey) {
+    http_response_code(500);
+    echo json_encode([
+        "error" => "Thiếu API key"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 $raw = file_get_contents("php://input");
 $data = json_decode($raw, true);
 
@@ -16,7 +46,7 @@ if (!$data || !isset($data['message'])) {
     http_response_code(400);
     echo json_encode([
         "error" => "Thiếu nội dung câu hỏi"
-    ]);
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -27,19 +57,13 @@ if ($message === '') {
     http_response_code(400);
     echo json_encode([
         "error" => "Câu hỏi không được để trống"
-    ]);
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 // =========================
 // CẤU HÌNH GEMINI
 // =========================
-$apiKey = getenv('GEMINI_API_KEY');
-
-if (!$apiKey) {
-    $apiKey = 'AIzaSyCg5b3VrWZP882Lr63NbSYapTICM65JN8c';
-}
-
 $model = 'gemini-3-flash-preview';
 
 // =========================
@@ -73,7 +97,6 @@ CÁCH TRÌNH BÀY:
 - Ưu tiên câu ngắn, rõ
 - Có thể xuống dòng để dễ đọc
 - Khi phù hợp, dùng gạch đầu dòng ngắn
-
 EOT;
 
 // =========================
@@ -88,21 +111,12 @@ if (is_array($history)) {
 
         if ($text === '') continue;
 
-        if ($role === 'user') {
-            $contents[] = [
-                "role" => "user",
-                "parts" => [
-                    ["text" => $text]
-                ]
-            ];
-        } else {
-            $contents[] = [
-                "role" => "model",
-                "parts" => [
-                    ["text" => $text]
-                ]
-            ];
-        }
+        $contents[] = [
+            "role" => $role === 'user' ? "user" : "model",
+            "parts" => [
+                ["text" => $text]
+            ]
+        ];
     }
 }
 
@@ -164,8 +178,7 @@ $result = json_decode($response, true);
 if ($httpCode < 200 || $httpCode >= 300) {
     http_response_code($httpCode ?: 500);
     echo json_encode([
-        "error" => $result['error']['message'] ?? "Gemini API request failed",
-        "debug" => $result
+        "error" => $result['error']['message'] ?? "Gemini API request failed"
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -191,4 +204,3 @@ if ($reply === '') {
 echo json_encode([
     "reply" => $reply
 ], JSON_UNESCAPED_UNICODE);
-

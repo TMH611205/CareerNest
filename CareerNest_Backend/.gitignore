@@ -1,0 +1,14 @@
+# Ẩn file môi trường
+.env
+CareerNest_Backend/.env
+
+# Node / VSCode
+node_modules/
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
